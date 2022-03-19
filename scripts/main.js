@@ -7,7 +7,7 @@ class Envio {
   }
 
   calcularPrecio() {
-    // Digamos que el precio general será de 0.5$ por km de recorrido
+    // El precio general será de 0.5$ por km de recorrido
     let precio = 0.5
     // El precio será entonces 0.5$ * la distancia en km
     precio *= Ubicacion.calcularDistancia(this.origen, this.destino)
@@ -31,7 +31,7 @@ class Ubicacion {
   }
 
   static calcularDistancia(origen, destino) {
-    // Retorna la distancia entre dos puntos usando la fórmula
+    // Retornar la distancia entre dos puntos usando la fórmula
     // de la distancia entre dos puntos
     return Math.sqrt((destino.x - origen.x) ** 2 + (destino.y - origen.y) ** 2)
   }
@@ -43,14 +43,17 @@ let selectDestino = document.getElementById('select-destino')
 
 // Agregar cada ubicación de la clase Ubicacion como options a cada select
 Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
-  selectOrigen.appendChild(new Option(ubicacion.nombre, ubicacion.nombre))
-  selectDestino.appendChild(new Option(ubicacion.nombre, ubicacion.nombre))
+  // Convertir la primera letra de cada nombre en mayúsculas para mejor presentación
+  nombreEnMayuscula =
+    ubicacion.nombre.charAt(0).toUpperCase() + ubicacion.nombre.slice(1)
+  selectOrigen.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
+  selectDestino.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
 })
 
 // Obtener la referencia al form y escuchar al evento submit
 let form = document.getElementById('formulario')
 form.addEventListener('submit', (event) => {
-  // Evita que se recarge la página
+  // Evitar que se recarge la página
   event.preventDefault()
   console.log('submitted')
 })
