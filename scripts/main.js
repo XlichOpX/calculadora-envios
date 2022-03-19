@@ -18,6 +18,12 @@ class Envio {
 }
 
 class Ubicacion {
+  static ubicaciones = {
+    caracas: new Ubicacion('caracas', 0, 0),
+    maracay: new Ubicacion('maracay', 10, 10),
+    valencia: new Ubicacion('valencia', 30, 30)
+  }
+
   constructor(nombre, x, y) {
     this.nombre = nombre
     this.x = x
@@ -30,3 +36,21 @@ class Ubicacion {
     return Math.sqrt((destino.x - origen.x) ** 2 + (destino.y - origen.y) ** 2)
   }
 }
+
+// Obtener las referencias a los selects del form
+let selectOrigen = document.getElementById('select-origen')
+let selectDestino = document.getElementById('select-destino')
+
+// Agregar cada ubicación de la clase Ubicacion como options a cada select
+Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
+  selectOrigen.appendChild(new Option(ubicacion.nombre, ubicacion.nombre))
+  selectDestino.appendChild(new Option(ubicacion.nombre, ubicacion.nombre))
+})
+
+// Obtener la referencia al form y escuchar al evento submit
+let form = document.getElementById('formulario')
+form.addEventListener('submit', (event) => {
+  // Evita que se recarge la página
+  event.preventDefault()
+  console.log('submitted')
+})
