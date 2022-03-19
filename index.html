@@ -11,13 +11,19 @@
     <hr />
     <form method="get" id="formulario">
       <label for="origen">Origen</label>
-      <select type="text" id="select-origen" name="origen"></select>
+      <select type="text" id="select-origen" name="origen" required></select>
 
       <label for="destino">Destino</label>
-      <select type="text" id="select-destino" name="destino"></select>
+      <select type="text" id="select-destino" name="destino" required></select>
 
       <label for="tarifa">Tarifa</label>
-      <input type="number" id="tarifa" name="tarifa" />
+      <input
+        type="text"
+        id="tarifa"
+        name="tarifa"
+        required
+        pattern="\d+([\.,]\d+)?"
+      />
 
       <button>Calcular</button>
     </form>
