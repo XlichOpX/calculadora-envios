@@ -1,0 +1,19 @@
+body {
+  max-width: 800px;
+  margin: auto;
+}
+
+.encabezado {
+  text-align: center;
+}
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}

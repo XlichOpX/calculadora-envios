@@ -1,6 +1,7 @@
 import Ubicacion from './ubicacion.js'
 import Utilidades from './utilidades.js'
 import Transporte from './transporte.js'
+import Envio from './envio.js'
 
 export default class CalculadoraCostosEnvios {
   iniciar() {
