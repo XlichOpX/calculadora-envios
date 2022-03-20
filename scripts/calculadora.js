@@ -14,15 +14,17 @@ class CalculadoraCostosEnvios {
     // Agregar cada ubicación de la clase Ubicacion como options a cada select
     Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
       // Convertir la primera letra de cada nombre en mayúsculas para mejor presentación
-      const nombreEnMayuscula =
-        ubicacion.nombre.charAt(0).toUpperCase() + ubicacion.nombre.slice(1)
+      const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
+        ubicacion.nombre
+      )
       selectOrigen.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
       selectDestino.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
     })
 
     Object.values(Transporte.transportes).forEach((transporte) => {
-      const nombreEnMayuscula =
-        transporte.nombre.charAt(0).toUpperCase() + transporte.nombre.slice(1)
+      const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
+        transporte.nombre
+      )
       selectTransporte.appendChild(
         new Option(nombreEnMayuscula, transporte.nombre)
       )
