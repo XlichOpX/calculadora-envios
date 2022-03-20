@@ -10,17 +10,19 @@ class Envio {
   }
 
   calcularPrecio() {
-    // El precio general será de 0.5$ por km de recorrido
-    let precio = 0.5
-    // El precio será entonces 0.5$ * la distancia en km
-    precio *= this.distancia
+    // El precio base será de 0.5$ por km de recorrido
+    const precioBase = this.distancia * 0.5
+
     // + el % de la tarifa
-    precio += precio * this.tarifa
+    let precio = precioBase + precioBase * this.tarifa
+
+    // + el % del tipo de transporte
+    precio += precioBase * this.transporte.tarifa
     return precio
   }
 
   calcularTiempoEstimado() {
     const tiempoEstimado = this.distancia / this.transporte.velocidad
-    return tiempoEstimado
+    return tiempoEstimado // en horas
   }
 }
