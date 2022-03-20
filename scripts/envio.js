@@ -1,6 +1,6 @@
-import Ubicacion from 'scripts/ubicacion.js'
+import Ubicacion from './ubicacion.js'
 
-export class Envio {
+export default class Envio {
   constructor(origen, destino, transporte, tarifa) {
     this.origen = origen
     this.destino = destino

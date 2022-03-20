@@ -1,4 +1,4 @@
-import CalculadoraCostosEnvios from 'scripts/calculadora.js'
+import CalculadoraCostosEnvios from './calculadora.js'
 
 let calculadora = new CalculadoraCostosEnvios()
 calculadora.iniciar()
