@@ -8,8 +8,10 @@ class CalculadoraCostosEnvios {
     // Obtener la referencia al input de tarifa
     const inputTarifa = document.getElementById('tarifa')
 
-    // Obtener la referencia al párrafo del precio
-    const parrafoPrecio = document.getElementById('precio-calculado')
+    // Obtener las referencias a los recipientes de las salidas
+    const recipientePrecio = document.getElementById('precio-calculado')
+    const recipienteDistancia = document.getElementById('distancia-recorrida')
+    const recipienteTiempoEstimado = document.getElementById('tiempo-estimado')
 
     // Agregar cada ubicación de la clase Ubicacion como options a cada select
     Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
@@ -45,7 +47,15 @@ class CalculadoraCostosEnvios {
       )
 
       // Mostrar el precio calculado
-      parrafoPrecio.innerText = `$${envio.precio.toFixed(2)}`
+      recipientePrecio.innerText = `Costo del envío: $${envio.precio.toFixed(
+        2
+      )}`
+      recipienteDistancia.innerText = `Distancia a recorrer: ${envio.distancia.toFixed(
+        2
+      )} km`
+      recipienteTiempoEstimado.innerText = `Tiempo de recorrido estimado: ${envio.tiempoEstimado.toFixed(
+        2
+      )} horas`
     })
   }
 }
