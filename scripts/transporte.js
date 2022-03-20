@@ -1,7 +1,7 @@
 class Transporte {
   static transportes = {
-    moto: new Transporte('moto', 50, 50, 0.2),
-    furgo: new Transporte('furgo', 50, 4000, 0.3)
+    moto: new Transporte('moto', 60, 50, 0.2),
+    furgo: new Transporte('furgo', 45, 4000, 0.3)
   }
 
   constructor(nombre, velocidad, capacidad, tarifa) {
