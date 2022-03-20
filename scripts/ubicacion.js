@@ -1,4 +1,4 @@
-class Ubicacion {
+export class Ubicacion {
   static ubicaciones = {
     caracas: new Ubicacion('caracas', 0, 0),
     maracay: new Ubicacion('maracay', 10, 10),

@@ -1,4 +1,7 @@
-class CalculadoraCostosEnvios {
+import Ubicacion from 'scripts/ubicacion.js'
+import Utilidades from 'scripts/utilidades.js'
+
+export class CalculadoraCostosEnvios {
   iniciar() {
     // Obtener las referencias a los selects del form
     const selectOrigen = document.getElementById('select-origen')
