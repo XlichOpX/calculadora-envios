@@ -1,6 +1,6 @@
 class Envio {
   constructor(origen, destino, tarifa = 0.2) {
-    this.tarifa = tarifa / 100
+    this.tarifa = tarifa / 100 // pasar el % a su forma decimal
     this.origen = origen
     this.destino = destino
     this.precio = this.calcularPrecio()
