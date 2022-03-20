@@ -1,5 +1,5 @@
 class CalculadoraCostosEnvios {
-  encender() {
+  iniciar() {
     // Obtener las referencias a los selects del form
     const selectOrigen = document.getElementById('select-origen')
     const selectDestino = document.getElementById('select-destino')

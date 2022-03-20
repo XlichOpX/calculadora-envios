@@ -1,2 +1,2 @@
 let calculadora = new CalculadoraCostosEnvios()
-calculadora.encender()
+calculadora.iniciar()
