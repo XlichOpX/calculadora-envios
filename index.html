@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="no-js" lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,32 +23,46 @@
     <script type="module" src="./scripts/main.js"></script>
   </head>
   <body>
-    <h1>Calculadora de costos de envío</h1>
-    <hr />
-    <form id="formulario">
-      <label for="origen">Origen</label>
-      <select id="select-origen" name="origen" required></select>
+    <div class="calculadora">
+      <h1 class="text-center success">Calculadora de costos de envío</h1>
+      <hr />
+      <form id="formulario" class="grid-x grid-margin-x">
+        <div class="cell medium-6">
+          <label for="origen">Origen</label>
+          <select id="select-origen" name="origen" required></select>
+        </div>
 
-      <label for="destino">Destino</label>
-      <select id="select-destino" name="destino" required></select>
+        <div class="cell medium-6">
+          <label for="destino">Destino</label>
+          <select id="select-destino" name="destino" required></select>
+        </div>
 
-      <label for="transporte">Transporte</label>
-      <select id="select-transporte" name="transporte" required></select>
+        <div class="cell medium-6">
+          <label for="transporte">Transporte</label>
+          <select id="select-transporte" name="transporte" required></select>
+        </div>
 
-      <label for="tarifa">Tarifa</label>
-      <input
-        type="text"
-        id="tarifa"
-        name="tarifa"
-        required
-        pattern="\d+([\.,]\d+)?"
-      />
+        <div class="cell medium-6">
+          <label for="tarifa">Tarifa</label>
+          <div class="input-group">
+            <input
+              type="text"
+              id="tarifa"
+              name="tarifa"
+              required
+              pattern="\d+([\.,]\d+)?"
+              class="input-group-field"
+            />
+            <span class="input-group-label">%</span>
+          </div>
+        </div>
 
-      <button>Calcular</button>
-    </form>
-    <hr />
-    <p id="precio-calculado"></p>
-    <p id="distancia-recorrida"></p>
-    <p id="tiempo-estimado"></p>
+        <button class="cell submit button">Calcular</button>
+      </form>
+      <hr />
+      <p id="precio-calculado"></p>
+      <p id="distancia-recorrida"></p>
+      <p id="tiempo-estimado"></p>
+    </div>
   </body>
 </html>
