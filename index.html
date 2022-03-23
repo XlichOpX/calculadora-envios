@@ -28,6 +28,58 @@
       <hr />
       <form id="formulario" class="grid-x grid-margin-x">
         <div class="cell medium-6">
+          <label for="peso">Peso del paquete</label>
+          <div class="input-group">
+            <input
+              type="text"
+              id="peso"
+              name="peso"
+              required
+              pattern="\d+([\.,]\d+)?"
+              class="input-group-field text-right"
+            />
+            <span class="input-group-label">gr</span>
+          </div>
+        </div>
+
+        <div class="cell medium-6">
+          <div class="grid-x grid-margin-x align-middle text-center">
+            <div class="cell small-3">
+              <label for="largo">Largo</label>
+              <input
+                type="text"
+                id="largo"
+                name="largo"
+                required
+                pattern="\d+([\.,]\d+)?"
+              />
+            </div>
+            <div class="cell auto">x</div>
+            <div class="cell small-3">
+              <label for="ancho">Ancho</label>
+              <input
+                type="text"
+                id="ancho"
+                name="ancho"
+                required
+                pattern="\d+([\.,]\d+)?"
+              />
+            </div>
+            <div class="cell auto">x</div>
+            <div class="cell small-3">
+              <label for="alto">Alto</label>
+              <input
+                type="text"
+                id="alto"
+                name="alto"
+                required
+                pattern="\d+([\.,]\d+)?"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="cell medium-6">
           <label for="origen">Origen</label>
           <select id="select-origen" name="origen" required></select>
         </div>
