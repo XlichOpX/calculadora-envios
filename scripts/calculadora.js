@@ -40,7 +40,6 @@ export default class CalculadoraCostosEnvios {
     form.submit((event) => {
       // Evitar que se recarge la página
       event.preventDefault()
-      console.log('hola')
 
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
