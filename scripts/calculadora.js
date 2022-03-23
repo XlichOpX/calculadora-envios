@@ -6,17 +6,17 @@ import Envio from './envio.js'
 export default class CalculadoraCostosEnvios {
   iniciar() {
     // Obtener las referencias a los selects del form
-    const selectOrigen = document.getElementById('select-origen')
-    const selectDestino = document.getElementById('select-destino')
-    const selectTransporte = document.getElementById('select-transporte')
+    const selectOrigen = $('#select-origen')
+    const selectDestino = $('#select-destino')
+    const selectTransporte = $('#select-transporte')
 
     // Obtener la referencia al input de tarifa
-    const inputTarifa = document.getElementById('tarifa')
+    const inputTarifa = $('#tarifa')
 
     // Obtener las referencias a los recipientes de las salidas
-    const recipientePrecio = document.getElementById('precio-calculado')
-    const recipienteDistancia = document.getElementById('distancia-recorrida')
-    const recipienteTiempoEstimado = document.getElementById('tiempo-estimado')
+    const recipientePrecio = $('#precio-calculado')
+    const recipienteDistancia = $('#distancia-recorrida')
+    const recipienteTiempoEstimado = $('#tiempo-estimado')
 
     // Agregar cada ubicación de la clase Ubicacion como options a cada select
     Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
@@ -24,43 +24,40 @@ export default class CalculadoraCostosEnvios {
       const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
         ubicacion.nombre
       )
-      selectOrigen.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
-      selectDestino.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre))
+      selectOrigen.append(new Option(nombreEnMayuscula, ubicacion.nombre))
+      selectDestino.append(new Option(nombreEnMayuscula, ubicacion.nombre))
     })
 
     Object.values(Transporte.transportes).forEach((transporte) => {
       const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
         transporte.nombre
       )
-      selectTransporte.appendChild(
-        new Option(nombreEnMayuscula, transporte.nombre)
-      )
+      selectTransporte.append(new Option(nombreEnMayuscula, transporte.nombre))
     })
 
     // Obtener la referencia al form y escuchar al evento submit
-    const form = document.getElementById('formulario')
-    form.addEventListener('submit', (event) => {
+    const form = $('#formulario')
+    form.submit((event) => {
       // Evitar que se recarge la página
       event.preventDefault()
+      console.log('hola')
 
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
-        Ubicacion.ubicaciones[selectOrigen.value],
-        Ubicacion.ubicaciones[selectDestino.value],
-        Transporte.transportes[selectTransporte.value],
-        inputTarifa.value
+        Ubicacion.ubicaciones[selectOrigen.val()],
+        Ubicacion.ubicaciones[selectDestino.val()],
+        Transporte.transportes[selectTransporte.val()],
+        inputTarifa.val()
       )
 
       // Mostrar el precio calculado
-      recipientePrecio.innerText = `Costo del envío: $${envio.precio.toFixed(
-        2
-      )}`
-      recipienteDistancia.innerText = `Distancia a recorrer: ${envio.distancia.toFixed(
-        2
-      )} km`
-      recipienteTiempoEstimado.innerText = `Tiempo de recorrido estimado: ${envio.tiempoEstimado.toFixed(
-        2
-      )} horas`
+      recipientePrecio.text(`Costo del envío: $${envio.precio.toFixed(2)}`)
+      recipienteDistancia.text(
+        `Distancia a recorrer: ${envio.distancia.toFixed(2)} km`
+      )
+      recipienteTiempoEstimado.text(
+        `Tiempo de recorrido estimado: ${envio.tiempoEstimado.toFixed(2)} horas`
+      )
     })
   }
 }
