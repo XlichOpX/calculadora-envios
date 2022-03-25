@@ -2,18 +2,25 @@ import Ubicacion from './ubicacion.js'
 import Utilidades from './utilidades.js'
 import Transporte from './transporte.js'
 import Envio from './envio.js'
+import Paquete from './paquete.js'
 
 export default class CalculadoraCostosEnvios {
   iniciar() {
-    // Obtener las referencias a los selects del form
+    // Obtener el input peso del paquete
+    const inputPeso = $('#peso')
+
+    // Obtener los inputs  de dimensiones del paquete
+    const inputsDimensiones = $('input', '#dimensiones-paquete')
+
+    // Obtener los selects del form
     const selectOrigen = $('#select-origen')
     const selectDestino = $('#select-destino')
     const selectTransporte = $('#select-transporte')
 
-    // Obtener la referencia al input de tarifa
-    const inputTarifa = $('#tarifa')
+    // Obtener el input de ganancia
+    const inputGanancia = $('#ganancia')
 
-    // Obtener las referencias a los recipientes de las salidas
+    // Obtener los recipientes para las salidas
     const recipientePrecio = $('#precio-calculado')
     const recipienteDistancia = $('#distancia-recorrida')
     const recipienteTiempoEstimado = $('#tiempo-estimado')
@@ -35,18 +42,28 @@ export default class CalculadoraCostosEnvios {
       selectTransporte.append(new Option(nombreEnMayuscula, transporte.nombre))
     })
 
-    // Obtener la referencia al form y escuchar al evento submit
+    // Obtener el form y escuchar al evento submit
     const form = $('#formulario')
     form.submit((event) => {
       // Evitar que se recarge la página
       event.preventDefault()
 
+      // Crear el array de dimensiones para el paquete
+      let dimensiones = []
+      for (let i = 0; i < inputsDimensiones.length; i++) {
+        dimensiones.push(inputsDimensiones[i].value)
+      }
+
+      // Crear un paquete
+      let paquete = new Paquete(inputPeso.val(), dimensiones)
+
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
+        paquete,
         Ubicacion.ubicaciones[selectOrigen.val()],
         Ubicacion.ubicaciones[selectDestino.val()],
         Transporte.transportes[selectTransporte.val()],
-        inputTarifa.val()
+        inputGanancia.val()
       )
 
       // Mostrar el precio calculado

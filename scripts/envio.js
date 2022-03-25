@@ -1,25 +1,37 @@
 import Ubicacion from './ubicacion.js'
 
 export default class Envio {
-  constructor(origen, destino, transporte, tarifa) {
+  constructor(paquete, origen, destino, transporte, tarifa) {
+    this.paquete = paquete
     this.origen = origen
     this.destino = destino
     this.transporte = transporte
     this.distancia = Ubicacion.calcularDistancia(this.origen, this.destino)
-    this.tarifa = tarifa / 100 // Pasar el % a su forma decimal
+    this.gananciaConductor = tarifa / 100 // Pasar el % a su forma decimal
     this.precio = this.calcularPrecio()
     this.tiempoEstimado = this.calcularTiempoEstimado()
   }
 
   calcularPrecio() {
-    // El precio base será de 0.5$ por km de recorrido
-    const precioBase = this.distancia * 0.5
+    // El precio base será de 0.02$ por km de recorrido
+    const precioBase = this.distancia * 0.02
 
     // + el % de la tarifa
-    let precio = precioBase + precioBase * this.tarifa
+    let precio = precioBase + precioBase * this.gananciaConductor
 
     // + el % del tipo de transporte
     precio += precioBase * this.transporte.tarifa
+
+    // + un % del peso del paquete
+    // (se toma una décima parte de gananciaConductor para
+    // que el costo no sea exageradamente grande)
+    precio += this.paquete.peso * (this.gananciaConductor / 20)
+
+    // + un % del volumen del paquete
+    // (se toma una décima parte de gananciaConductor para
+    // que el costo no sea exageradamente grande)
+    precio += this.paquete.volumen * (this.gananciaConductor / 20)
+
     return precio
   }
 
