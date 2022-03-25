@@ -37,6 +37,7 @@
               required
               pattern="\d+([\.]\d+)?"
               class="input-group-field text-right"
+              placeholder="200.5"
             />
             <span class="input-group-label help-text">gr</span>
           </div>
@@ -53,6 +54,7 @@
                 required
                 pattern="\d+([\.]\d+)?"
                 class="text-center"
+                placeholder="20"
               />
             </div>
             <div class="cell shrink margin-0">x</div>
@@ -65,6 +67,7 @@
                 required
                 pattern="\d+([\.]\d+)?"
                 class="text-center"
+                placeholder="15"
               />
             </div>
             <div class="cell shrink margin-0">x</div>
@@ -77,6 +80,7 @@
                 required
                 pattern="\d+([\.]\d+)?"
                 class="text-center"
+                placeholder="10"
               />
             </div>
             <div class="cell shrink marginl-0">
@@ -87,17 +91,23 @@
 
         <div class="cell medium-6">
           <label for="origen">Origen</label>
-          <select id="select-origen" name="origen" required></select>
+          <select id="select-origen" name="origen" required>
+            <option value="" disabled selected>Selecciona una ubicación</option>
+          </select>
         </div>
 
         <div class="cell medium-6">
           <label for="destino">Destino</label>
-          <select id="select-destino" name="destino" required></select>
+          <select id="select-destino" name="destino" required>
+            <option value="" disabled selected>Selecciona una ubicación</option>
+          </select>
         </div>
 
         <div class="cell medium-6">
           <label for="transporte">Transporte</label>
-          <select id="select-transporte" name="transporte" required></select>
+          <select id="select-transporte" name="transporte" required>
+            <option value="" disabled selected>Selecciona un transporte</option>
+          </select>
         </div>
 
         <div class="cell medium-6">
@@ -110,6 +120,7 @@
               required
               pattern="\d+([\.]\d+)?"
               class="input-group-field text-right"
+              placeholder="20"
             />
             <span class="input-group-label help-text">%</span>
           </div>

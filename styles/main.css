@@ -17,3 +17,11 @@ body {
 .marginl-0 {
   margin-left: 0 !important;
 }
+
+select:invalid {
+  color: gray;
+}
+
+option {
+  color: black;
+}
