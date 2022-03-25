@@ -1,13 +1,13 @@
 import Ubicacion from './ubicacion.js'
 
 export default class Envio {
-  constructor(paquete, origen, destino, transporte, tarifa) {
+  constructor(paquete, origen, destino, transporte, gananciaCondcutor) {
     this.paquete = paquete
     this.origen = origen
     this.destino = destino
     this.transporte = transporte
     this.distancia = Ubicacion.calcularDistancia(this.origen, this.destino)
-    this.gananciaConductor = tarifa / 100 // Pasar el % a su forma decimal
+    this.gananciaConductor = gananciaCondcutor / 100 // Pasar el % a su forma decimal
     this.precio = this.calcularPrecio()
     this.tiempoEstimado = this.calcularTiempoEstimado()
   }
