@@ -13,6 +13,8 @@ export default class Envio {
   }
 
   calcularPrecio() {
+    if (this.distancia === 0) return 2
+
     // El precio base será de 0.02$ por km de recorrido
     const precioBase = this.distancia * 0.02
 
