@@ -38,13 +38,13 @@
               pattern="\d+([\.,]\d+)?"
               class="input-group-field text-right"
             />
-            <span class="input-group-label">gr</span>
+            <span class="input-group-label help-text">gr</span>
           </div>
         </div>
 
         <div class="cell medium-6" id="dimensiones-paquete">
           <div class="grid-x grid-margin-x align-middle text-center">
-            <div class="cell small-3">
+            <div class="cell auto">
               <label for="largo">Largo</label>
               <input
                 type="text"
@@ -52,10 +52,11 @@
                 name="largo"
                 required
                 pattern="\d+([\.,]\d+)?"
+                class="text-center"
               />
             </div>
-            <div class="cell auto">x</div>
-            <div class="cell small-3">
+            <div class="cell shrink margin-0">x</div>
+            <div class="cell auto">
               <label for="ancho">Ancho</label>
               <input
                 type="text"
@@ -63,10 +64,11 @@
                 name="ancho"
                 required
                 pattern="\d+([\.,]\d+)?"
+                class="text-center"
               />
             </div>
-            <div class="cell auto">x</div>
-            <div class="cell small-3">
+            <div class="cell shrink margin-0">x</div>
+            <div class="cell auto">
               <label for="alto">Alto</label>
               <input
                 type="text"
@@ -74,7 +76,11 @@
                 name="alto"
                 required
                 pattern="\d+([\.,]\d+)?"
+                class="text-center"
               />
+            </div>
+            <div class="cell shrink marginl-0">
+              <p class="help-text text-left margin-0">centímetros</p>
             </div>
           </div>
         </div>
@@ -95,7 +101,7 @@
         </div>
 
         <div class="cell medium-6">
-          <label for="ganancia">Ganancia conductor</label>
+          <label for="ganancia">Ganancia del conductor</label>
           <div class="input-group">
             <input
               type="text"
@@ -105,7 +111,7 @@
               pattern="\d+([\.,]\d+)?"
               class="input-group-field text-right"
             />
-            <span class="input-group-label">%</span>
+            <span class="input-group-label help-text">%</span>
           </div>
         </div>
 
