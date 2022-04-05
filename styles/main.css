@@ -8,6 +8,11 @@
   --bg-lighter: #fff;
   --border-radius: 4px;
   --primary-gradient: linear-gradient(hsl(195, 42%, 65%), hsl(194, 41%, 45%));
+  --primary-gradient-hover: linear-gradient(
+    hsl(195, 52%, 65%),
+    hsl(194, 51%, 45%)
+  );
+  --sm-shadow: 0 2px 2px rgba(10, 10, 10, 0.1);
 }
 
 body {
@@ -19,7 +24,7 @@ body {
   background-color: var(--bg-lighter);
   border-radius: var(--border-radius);
   margin-top: 15px;
-  padding: 30px;
+  padding: 14px 18px;
 }
 
 select:invalid {
@@ -73,12 +78,17 @@ option:disabled {
   text-decoration: underline;
 }
 
-form h2 {
-  font-size: large;
+h1 {
+  font-size: 1.75em;
 }
 
 hr {
+  margin-top: 0;
   border-color: var(--bg-dark);
+}
+
+form h2 {
+  font-size: large;
 }
 
 form h2::after {
@@ -104,10 +114,16 @@ select,
 
 .button {
   background: var(--primary-gradient);
+  box-shadow: var(--sm-shadow), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  color: var(--text-dark);
   border: 1px solid rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
   font-weight: bold;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  text-transform: uppercase;
+}
+
+.button:hover {
+  color: var(--text-dark);
+  background: var(--primary-gradient-hover);
 }
 
 .button:active {
