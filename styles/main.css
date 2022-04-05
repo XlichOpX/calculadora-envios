@@ -7,7 +7,7 @@
   --light-border: #cacaca;
   --bg-lighter: #fff;
   --border-radius: 4px;
-  --primary-gradient: linear-gradient(hsl(195, 42%, 65%), hsl(194, 41%, 45%));
+  --primary-gradient: linear-gradient(#80b8cb, #448ca2);
   --primary-gradient-hover: linear-gradient(
     hsl(195, 52%, 65%),
     hsl(194, 51%, 45%)
@@ -118,6 +118,7 @@ select,
   color: var(--text-dark);
   border: 1px solid rgba(0, 0, 0, 0.3);
   text-transform: capitalize;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
   font-weight: bold;
 }
 
