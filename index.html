@@ -29,21 +29,23 @@
   </head>
   <body>
     <header class="navbar">
-      <div class="navbar-brand">
-        <i class="bi bi-box-seam navbar-logo"></i>
-        Calculadora de envíos
-      </div>
+      <div class="container">
+        <div class="navbar-brand">
+          <img class="navbar-logo" src="./box-logo.svg" alt="Box logo" />
+          <span>Calculadora de envíos</span>
+        </div>
 
-      <nav class="navbar-nav">
-        <ul>
-          <li><a href="./views/calculadora.html">Calculadora</a></li>
-          <li><a href="./views/registro.html">Registro</a></li>
-        </ul>
-      </nav>
+        <nav class="navbar-nav">
+          <ul>
+            <li><a href="./views/calculadora.html">Calculadora</a></li>
+            <li><a href="./views/registro.html">Registro</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- Contenedor de la vista seleccionada -->
-    <div id="vista"></div>
+    <div id="vista" class="container"></div>
 
     <!-- Script principal -->
     <script type="module" src="./scripts/main.js"></script>
