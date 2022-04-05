@@ -20,6 +20,7 @@
 
     <!-- CSS propio -->
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/utilidades.css" />
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -28,22 +29,24 @@
     ></script>
   </head>
   <body>
-    <header class="navbar">
-      <div class="navbar-brand">
-        <i class="bi bi-box-seam navbar-logo"></i>
-        Calculadora de envíos
-      </div>
+    <header class="navbar sm-shadow">
+      <div class="container">
+        <div class="navbar-brand">
+          <img class="navbar-logo" src="./assets/logo.svg" alt="Logo" />
+          <span>Calculadora de envíos</span>
+        </div>
 
-      <nav class="navbar-nav">
-        <ul>
-          <li><a href="./views/calculadora.html">Calculadora</a></li>
-          <li><a href="./views/registro.html">Registro</a></li>
-        </ul>
-      </nav>
+        <nav class="navbar-nav">
+          <ul>
+            <li><a href="./views/calculadora.html">Calculadora</a></li>
+            <li><a href="./views/registro.html">Registro</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- Contenedor de la vista seleccionada -->
-    <div id="vista"></div>
+    <div id="vista" class="container"></div>
 
     <!-- Script principal -->
     <script type="module" src="./scripts/main.js"></script>

@@ -1,0 +1,13 @@
+.container {
+  margin: auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.sm-shadow {
+  box-shadow: 0 2px 2px rgba(10, 10, 10, 0.1);
+}
+
+.border {
+  border: 1px solid var(--light-border);
+}
