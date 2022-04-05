@@ -25,3 +25,35 @@ select:invalid {
 option {
   color: black;
 }
+
+.navbar {
+  background-color: #222;
+  color: #fff;
+
+  padding: 10px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+}
+
+.navbar-nav ul {
+  list-style: none;
+
+  margin: 0;
+
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-nav a {
+  color: #fff;
+}
+
+.navbar-nav a:hover {
+  text-decoration: underline;
+}
