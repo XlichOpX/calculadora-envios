@@ -1,6 +1,7 @@
-import CalculadoraCostosEnvios from './calculadora.js'
+import CalculadoraCostosEnvios from "./calculadora.js";
+import Utilidades from "./utilidades.js";
 
-$(document).foundation()
-
-let calculadora = new CalculadoraCostosEnvios()
-calculadora.iniciar()
+Utilidades.cambiarVista("../views/calculadora.html").then(() => {
+  let calculadora = new CalculadoraCostosEnvios();
+  calculadora.iniciar();
+});

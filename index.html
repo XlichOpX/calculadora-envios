@@ -16,129 +16,17 @@
     <!-- CSS propio -->
     <link rel="stylesheet" href="./styles/main.css" />
 
-    <!-- jQuery - (Foundation lo necesita) -->
-    <script src="./scripts/libs/jquery-3.6.0.js" defer></script>
-
-    <!-- Foundation JS -->
     <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js"
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
-      defer
     ></script>
+  </head>
+  <body>
+    <!-- Contenedor de la vista seleccionada -->
+    <div id="vista"></div>
 
     <!-- Script principal -->
     <script type="module" src="./scripts/main.js"></script>
-  </head>
-  <body>
-    <div class="calculadora">
-      <h1 class="text-center">Calculadora de costos de envío</h1>
-      <hr />
-      <form id="formulario" class="grid-x grid-margin-x">
-        <div class="cell medium-6">
-          <label for="peso">Peso del paquete</label>
-          <div class="input-group">
-            <input
-              type="text"
-              id="peso"
-              name="peso"
-              required
-              pattern="\d+([\.]\d+)?"
-              class="input-group-field text-right"
-              placeholder="200.5"
-            />
-            <span class="input-group-label help-text">gr</span>
-          </div>
-        </div>
-
-        <div class="cell medium-6" id="dimensiones-paquete">
-          <div class="grid-x grid-margin-x align-middle text-center">
-            <div class="cell auto">
-              <label for="largo">Largo</label>
-              <input
-                type="text"
-                id="largo"
-                name="largo"
-                required
-                pattern="\d+([\.]\d+)?"
-                class="text-center"
-                placeholder="20"
-              />
-            </div>
-            <div class="cell shrink margin-0">x</div>
-            <div class="cell auto">
-              <label for="ancho">Ancho</label>
-              <input
-                type="text"
-                id="ancho"
-                name="ancho"
-                required
-                pattern="\d+([\.]\d+)?"
-                class="text-center"
-                placeholder="15"
-              />
-            </div>
-            <div class="cell shrink margin-0">x</div>
-            <div class="cell auto">
-              <label for="alto">Alto</label>
-              <input
-                type="text"
-                id="alto"
-                name="alto"
-                required
-                pattern="\d+([\.]\d+)?"
-                class="text-center"
-                placeholder="10"
-              />
-            </div>
-            <div class="cell shrink marginl-0">
-              <p class="help-text text-left margin-0">centímetros</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="cell medium-6">
-          <label for="origen">Origen</label>
-          <select id="select-origen" name="origen" required>
-            <option value="" disabled selected>Selecciona una ubicación</option>
-          </select>
-        </div>
-
-        <div class="cell medium-6">
-          <label for="destino">Destino</label>
-          <select id="select-destino" name="destino" required>
-            <option value="" disabled selected>Selecciona una ubicación</option>
-          </select>
-        </div>
-
-        <div class="cell medium-6">
-          <label for="transporte">Transporte</label>
-          <select id="select-transporte" name="transporte" required>
-            <option value="" disabled selected>Selecciona un transporte</option>
-          </select>
-        </div>
-
-        <div class="cell medium-6">
-          <label for="ganancia">Ganancia del conductor</label>
-          <div class="input-group">
-            <input
-              type="text"
-              id="ganancia"
-              name="ganancia"
-              required
-              pattern="\d+([\.]\d+)?"
-              class="input-group-field text-right"
-              placeholder="20"
-            />
-            <span class="input-group-label help-text">%</span>
-          </div>
-        </div>
-
-        <button class="cell button">Calcular</button>
-      </form>
-      <hr />
-      <p id="precio-calculado"></p>
-      <p id="distancia-recorrida"></p>
-      <p id="tiempo-estimado"></p>
-    </div>
   </body>
 </html>
