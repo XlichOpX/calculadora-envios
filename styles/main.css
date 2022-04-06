@@ -92,13 +92,13 @@ form h2 {
 }
 
 form h2::after {
-  content: "";
+  content: '';
   width: 100%;
   display: block;
   border-top: 1px solid var(--bg-dark);
 }
 
-[type="text"],
+[type='text'],
 select,
 .button {
   border-radius: 4px;
