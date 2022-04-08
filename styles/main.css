@@ -6,6 +6,10 @@
   --bg-light: #efefef;
   --light-border: #cacaca;
   --bg-lighter: #fff;
+  --text-error: #ae2725;
+  --bg-error: #f1bdbc;
+  --bg-success: #aaea99;
+  --text-success: #305c1f;
   --border-radius: 0px;
   --primary-gradient: linear-gradient(#80b8cb, #448ca2);
   --primary-gradient-hover: linear-gradient(
@@ -135,15 +139,15 @@ select,
 
 .error {
   display: block;
-  background-color: #f1bdbc;
-  color: #ae2725;
+  background-color: var(--bg-error);
+  color: var(--text-error);
 }
 
 .error.active {
   padding: 0.5em;
   margin-top: -1rem;
   margin-bottom: 1rem;
-  border: 1px solid #ae2725;
+  border: 1px solid var(--text-error);
   border-radius: var(--border-radius);
 }
 
@@ -152,9 +156,9 @@ select,
   bottom: 20px;
   right: 20px;
   padding: 10px;
-  background-color: #aaea99;
-  border: 1px solid #305c1f;
-  color: #305c1f;
+  background-color: var(--bg-success);
+  border: 1px solid var(--text-success);
+  color: var(--text-success);
   box-shadow: var(--sm-shadow);
   z-index: 999;
 }
