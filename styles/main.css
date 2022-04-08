@@ -132,3 +132,17 @@ select,
 .button:active {
   transform: translateY(1px);
 }
+
+.error {
+  display: block;
+  background-color: #f1bdbc;
+  color: #ae2725;
+}
+
+.error.active {
+  padding: 0.5em;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ae2725;
+  border-radius: var(--border-radius);
+}
