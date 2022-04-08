@@ -1,22 +1,22 @@
 export default class Ubicacion {
   static ubicaciones = {
-    caracas: new Ubicacion('caracas', 0, 0),
-    maracay: new Ubicacion('maracay', 10, 10),
-    valencia: new Ubicacion('valencia', 30, 30),
-    tachira: new Ubicacion('tachira', 50, 70),
-    hatillo: new Ubicacion('hatillo', 15, 60),
-    antimano: new Ubicacion('antimano', 30, 30)
-  }
+    caracas: new Ubicacion("caracas", 0, 0),
+    maracay: new Ubicacion("maracay", 10, 10),
+    valencia: new Ubicacion("valencia", 30, 30),
+    tachira: new Ubicacion("tachira", 50, 70),
+    hatillo: new Ubicacion("hatillo", 15, 60),
+    antimano: new Ubicacion("antimano", 30, 30),
+  };
 
   constructor(nombre, x, y) {
-    this.nombre = nombre
-    this.x = x
-    this.y = y
+    this.nombre = nombre;
+    this.x = x;
+    this.y = y;
   }
 
   static calcularDistancia(origen, destino) {
     // Retornar la distancia entre dos puntos usando la fórmula
     // de la distancia entre dos puntos
-    return Math.sqrt((destino.x - origen.x) ** 2 + (destino.y - origen.y) ** 2)
+    return Math.sqrt((destino.x - origen.x) ** 2 + (destino.y - origen.y) ** 2);
   }
 }
