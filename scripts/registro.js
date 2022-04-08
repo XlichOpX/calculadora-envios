@@ -7,7 +7,7 @@ export default class Registro {
     // Almacena el estado seleccionado para tener a la mano sus municipios
     this.estadoSeleccionado = null
 
-    // Referencias al form y sus inputs
+    // Referencias al form y sus fieldsets
     this.form = document.getElementById('form-registro')
     this.datosBasicos = document.getElementById('datos-basicos').elements
     this.direccion = document.getElementById('direccion').elements
@@ -39,11 +39,11 @@ export default class Registro {
   aggListeners() {
     // Agg los listeners a cada input para validarlos cuando el usuario escriba en ellos
     this.datosBasicos['nombres'].addEventListener('input', (e) => {
-      this.validarNombre(this.datosBasicos['nombres'])
+      this.validarNombreApellido(this.datosBasicos['nombres'])
     })
 
     this.datosBasicos['apellidos'].addEventListener('input', (e) => {
-      this.validarNombre(this.datosBasicos['apellidos'])
+      this.validarNombreApellido(this.datosBasicos['apellidos'])
     })
 
     this.datosBasicos['cedula'].addEventListener('input', (e) => {
@@ -125,106 +125,79 @@ export default class Registro {
 
   // Ejecuta los validadores para los datos básicos
   validarDatosBasicos() {
-    this.validarNombre(this.datosBasicos['nombres'])
-    this.validarNombre(this.datosBasicos['apellidos'])
+    this.validarNombreApellido(this.datosBasicos['nombres'])
+    this.validarNombreApellido(this.datosBasicos['apellidos'])
     this.validarCedula()
     this.validarTelefono()
     this.validarEmail()
     this.validarSexo()
   }
 
-  // Valida que sea menor a 50 caracteres y da feedback al usuario
-  // Recibe un parametro para validar tanto los nombres
-  // como los apellidos
-  validarNombre(input) {
-    const nombre = input.value
-    const contenedorError = input.nextElementSibling
-    if (nombre !== '' && Validadores.nombre(nombre)) {
-      this.borrarError(contenedorError)
-      return true
-    } else {
-      this.mostrarError(
-        contenedorError,
-        'Este campo es requerido y debe tener menos de 50 caracteres'
-      )
-      return false
+  // Valida el input dado con los parámetros dados
+  // Si no es válido, muestra el msj de error dado
+  validarInput(input, msjError, validadores) {
+    const value = input.value
+    for (let i = 0; i < validadores.length; i++) {
+      const validador = validadores[i]
+      if (!validador(value)) {
+        this.mostrarError(input, msjError)
+        return false
+      }
     }
+    this.borrarError(input)
+    return true
   }
 
-  // Valida que la cedula cumpla con el formato necesario
-  // y da feedback al usuario
+  validarNombreApellido(input) {
+    this.validarInput(
+      input,
+      'Este campo es requerido y debe tener menos de 50 caracteres',
+      [Validadores.noNull, Validadores.nombre]
+    )
+  }
+
   validarCedula() {
-    const cedula = this.datosBasicos['cedula'].value
-    const contenedorError = this.datosBasicos['cedula'].nextElementSibling
-    if (cedula !== '' && Validadores.cedula(cedula)) {
-      this.borrarError(contenedorError)
-      return true
-    } else {
-      this.mostrarError(
-        contenedorError,
-        'Este campo es requerido y debe coincidir con el formato VXXXXXXXX'
-      )
-      return false
-    }
+    this.validarInput(
+      this.datosBasicos['cedula'],
+      'Este campo es requerido y debe coincidir con el formato VXXXXXXXX',
+      [Validadores.noNull, Validadores.cedula]
+    )
   }
 
-  // Valida que el telefono cumpla con el formato necesario
-  // y da feedback al usuario
-  validarTelefono() {
-    const telefono = this.datosBasicos['telefono'].value
-    const contenedorError = this.datosBasicos['telefono'].nextElementSibling
-    if (telefono !== '' && Validadores.telefono(telefono)) {
-      this.borrarError(contenedorError)
-      return true
-    } else {
-      this.mostrarError(
-        contenedorError,
-        'Este campo es requerido y debe coincidir con el formato 0XXXXXXXXXX. Ejemplo: 04141327382'
-      )
-      return false
-    }
-  }
-
-  // Valida que el email cumpla con el formato necesario
-  // y da feedback al usuario
-  validarEmail() {
-    const email = this.datosBasicos['email'].value
-    const contenedorError = this.datosBasicos['email'].nextElementSibling
-    if (email !== '' && Validadores.email(email)) {
-      this.borrarError(contenedorError)
-      return true
-    } else {
-      this.mostrarError(
-        contenedorError,
-        'Este campo es requerido y debe ser un email válido. Ejemplo: yhan.carlos2001@gmail.com'
-      )
-      return false
-    }
-  }
-
-  // Valida que se halla seleccionado un sexo
   validarSexo() {
-    const sexo = this.datosBasicos['sexo'].value
-    const contenedorError = this.datosBasicos['sexo'].nextElementSibling
-    if (sexo !== '') {
-      this.borrarError(contenedorError)
-      return true
-    } else {
-      this.mostrarError(contenedorError, 'Este campo es requerido')
-      return false
-    }
+    this.validarInput(this.datosBasicos['sexo'], 'Este campo es requerido.', [
+      Validadores.noNull
+    ])
+  }
+
+  validarEmail() {
+    this.validarInput(
+      this.datosBasicos['email'],
+      'Este campo es requerido y debe ser un email válido. Ejemplo: yhan.carlos2001@gmail.com',
+      [Validadores.noNull, Validadores.email]
+    )
+  }
+
+  validarTelefono() {
+    this.validarInput(
+      this.datosBasicos['telefono'],
+      'Este campo es requerido y debe coincidir con el formato 0XXXXXXXXXX. Ejemplo: 04141327382',
+      [Validadores.noNull, Validadores.telefono]
+    )
   }
 
   // Coloca el msj de error en el elemento especificado
   // y le agg las clases de error activo
-  mostrarError(contenedor, msj) {
+  mostrarError(input, msj) {
+    const contenedor = input.nextElementSibling
     contenedor.textContent = msj
     contenedor.className = 'error active'
   }
 
   // Borra el msj de error en el elemento especificado
   // y le quita la clase active
-  borrarError(contenedor) {
+  borrarError(input) {
+    const contenedor = input.nextElementSibling
     contenedor.textContent = ''
     contenedor.className = 'error'
   }
