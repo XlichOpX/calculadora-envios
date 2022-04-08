@@ -95,6 +95,8 @@ export default class Registro {
       const direccionValida = this.validarDireccion()
       if (datosBasicosValidos && direccionValida) {
         this.form.reset()
+        Utilidades.eliminarNodosHijos(this.direccion['municipio'])
+        Utilidades.eliminarNodosHijos(this.direccion['parroquia'])
         ToastService.crearToast('¡Registro exitoso!')
       } else {
         console.log('registro fallido')
