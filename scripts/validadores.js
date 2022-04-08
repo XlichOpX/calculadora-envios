@@ -1,4 +1,10 @@
 export default class Validadores {
+  // Verifica que el input no esté vacío
+  static noNull(value) {
+    if (value !== '') return true
+    return false
+  }
+
   // Verifica que el nombre sea menor a 50 caracteres
   static nombre(nombre) {
     if (nombre.length < 50) return true
