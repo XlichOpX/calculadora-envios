@@ -62,10 +62,39 @@ export default class Registro {
       this.validarSexo()
     })
 
+    this.direccion['estado'].addEventListener('input', (e) => {
+      this.validarEstado()
+      this.validarMunicipio()
+      this.validarParroquia()
+    })
+
+    this.direccion['municipio'].addEventListener('input', (e) => {
+      this.validarMunicipio()
+    })
+
+    this.direccion['parroquia'].addEventListener('input', (e) => {
+      this.validarParroquia()
+    })
+
+    this.direccion['calle'].addEventListener('input', (e) => {
+      this.validarCalle()
+    })
+
+    this.direccion['casa-edificio'].addEventListener('input', (e) => {
+      this.validarCasa()
+    })
+
     // Validar al hacer submit
     this.form.addEventListener('submit', (e) => {
       e.preventDefault()
-      this.validarDatosBasicos()
+      const datosBasicosValidos = this.validarDatosBasicos()
+      const direccionValida = this.validarDireccion()
+      if (datosBasicosValidos && direccionValida) {
+        this.form.reset()
+        this.crearToast('¡Registro exitoso!')
+      } else {
+        console.log('registro fallido')
+      }
     })
   }
 
@@ -125,12 +154,47 @@ export default class Registro {
 
   // Ejecuta los validadores para los datos básicos
   validarDatosBasicos() {
-    this.validarNombreApellido(this.datosBasicos['nombres'])
-    this.validarNombreApellido(this.datosBasicos['apellidos'])
-    this.validarCedula()
-    this.validarTelefono()
-    this.validarEmail()
-    this.validarSexo()
+    const nombreValido = this.validarNombreApellido(
+      this.datosBasicos['nombres']
+    )
+    const apellidoValido = this.validarNombreApellido(
+      this.datosBasicos['apellidos']
+    )
+    const cedulaValida = this.validarCedula()
+    const telefonoValido = this.validarTelefono()
+    const emailValido = this.validarEmail()
+    const sexoValido = this.validarSexo()
+
+    if (
+      nombreValido &&
+      apellidoValido &&
+      cedulaValida &&
+      telefonoValido &&
+      emailValido &&
+      sexoValido
+    ) {
+      return true
+    }
+    return false
+  }
+
+  // Ejecuta los validadores para la dirección
+  validarDireccion() {
+    const estadoValido = this.validarEstado()
+    const municipioValido = this.validarMunicipio()
+    const parroquiaValida = this.validarParroquia()
+    const calleValida = this.validarCalle()
+    const casaValida = this.validarCasa()
+    if (
+      estadoValido &&
+      municipioValido &&
+      parroquiaValida &&
+      calleValida &&
+      casaValida
+    ) {
+      return true
+    }
+    return false
   }
 
   // Valida el input dado con los parámetros dados
@@ -149,7 +213,7 @@ export default class Registro {
   }
 
   validarNombreApellido(input) {
-    this.validarInput(
+    return this.validarInput(
       input,
       'Este campo es requerido y debe tener menos de 50 caracteres',
       [Validadores.noNull, Validadores.nombre]
@@ -157,7 +221,7 @@ export default class Registro {
   }
 
   validarCedula() {
-    this.validarInput(
+    return this.validarInput(
       this.datosBasicos['cedula'],
       'Este campo es requerido y debe coincidir con el formato VXXXXXXXX',
       [Validadores.noNull, Validadores.cedula]
@@ -165,13 +229,15 @@ export default class Registro {
   }
 
   validarSexo() {
-    this.validarInput(this.datosBasicos['sexo'], 'Este campo es requerido.', [
-      Validadores.noNull
-    ])
+    return this.validarInput(
+      this.datosBasicos['sexo'],
+      'Este campo es requerido.',
+      [Validadores.noNull]
+    )
   }
 
   validarEmail() {
-    this.validarInput(
+    return this.validarInput(
       this.datosBasicos['email'],
       'Este campo es requerido y debe ser un email válido. Ejemplo: yhan.carlos2001@gmail.com',
       [Validadores.noNull, Validadores.email]
@@ -179,10 +245,50 @@ export default class Registro {
   }
 
   validarTelefono() {
-    this.validarInput(
+    return this.validarInput(
       this.datosBasicos['telefono'],
       'Este campo es requerido y debe coincidir con el formato 0XXXXXXXXXX. Ejemplo: 04141327382',
       [Validadores.noNull, Validadores.telefono]
+    )
+  }
+
+  validarEstado() {
+    return this.validarInput(
+      this.direccion['estado'],
+      'Este campo es requerido',
+      [Validadores.noNull]
+    )
+  }
+
+  validarMunicipio() {
+    return this.validarInput(
+      this.direccion['municipio'],
+      'Este campo es requerido',
+      [Validadores.noNull]
+    )
+  }
+
+  validarParroquia() {
+    return this.validarInput(
+      this.direccion['parroquia'],
+      'Este campo es requerido',
+      [Validadores.noNull]
+    )
+  }
+
+  validarCalle() {
+    return this.validarInput(
+      this.direccion['calle'],
+      'Este campo es requerido',
+      [Validadores.noNull]
+    )
+  }
+
+  validarCasa() {
+    return this.validarInput(
+      this.direccion['casa-edificio'],
+      'Este campo es requerido',
+      [Validadores.noNull]
     )
   }
 
@@ -200,5 +306,15 @@ export default class Registro {
     const contenedor = input.nextElementSibling
     contenedor.textContent = ''
     contenedor.className = 'error'
+  }
+
+  crearToast(msj) {
+    const toast = document.createElement('div')
+    toast.textContent = msj
+    toast.className = 'toast'
+    document.getElementById('vista').appendChild(toast)
+    setTimeout(() => {
+      document.getElementById('vista').removeChild(toast)
+    }, 5000)
   }
 }

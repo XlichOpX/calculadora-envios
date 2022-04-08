@@ -60,6 +60,7 @@
         <select id="estado">
           <option value="" selected disabled>Seleccione un estado</option>
         </select>
+        <span class="error"></span>
       </div>
 
       <div class="cell medium-6">
@@ -67,6 +68,7 @@
         <select id="municipio">
           <option value="" selected disabled>Seleccione un estado</option>
         </select>
+        <span class="error"></span>
       </div>
 
       <div class="cell medium-6">
@@ -74,18 +76,21 @@
         <select id="parroquia">
           <option value="" selected disabled>Seleccione un municipio</option>
         </select>
+        <span class="error"></span>
       </div>
 
       <div class="cell medium-6">
         <label for="calle">Calle</label>
-        <input type="text" id="telefono" placeholder="Esq. Guayabal a Sordo" />
+        <input type="text" id="calle" placeholder="Esq. Guayabal a Sordo" />
+        <span class="error"></span>
       </div>
 
       <div class="cell medium-6">
         <label for="casa-edificio">Casa o edificio</label>
-        <input type="text" id="telefono" placeholder="Edif. Amanecer" />
+        <input type="text" id="casa-edificio" placeholder="Edif. Amanecer" />
+        <span class="error"></span>
       </div>
-      <button class="cell button">Registrarse</button>
     </fieldset>
+    <button type="submit" class="cell button">Registrarse</button>
   </form>
 </div>

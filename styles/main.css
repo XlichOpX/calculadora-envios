@@ -146,3 +146,15 @@ select,
   border: 1px solid #ae2725;
   border-radius: var(--border-radius);
 }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #aaea99;
+  border: 1px solid #305c1f;
+  color: #305c1f;
+  box-shadow: var(--sm-shadow);
+  z-index: 999;
+}
