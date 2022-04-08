@@ -1,4 +1,5 @@
 import estados from './../assets/venezuela.js'
+import ToastService from './toasts.js'
 import Utilidades from './utilidades.js'
 import Validadores from './validadores.js'
 
@@ -32,7 +33,7 @@ export default class Registro {
       this.actParroquias()
     })
 
-    // Agg los listeners a los inputs
+    // Agg los listeners a los inputs para su validación
     this.aggListeners()
   }
 
@@ -64,6 +65,9 @@ export default class Registro {
 
     this.direccion['estado'].addEventListener('input', (e) => {
       this.validarEstado()
+      // Debido a que automaticamente se seleccionan municipio
+      // y parroquia al seleccionar estado, validar para
+      // quitar sus errores
       this.validarMunicipio()
       this.validarParroquia()
     })
@@ -91,7 +95,7 @@ export default class Registro {
       const direccionValida = this.validarDireccion()
       if (datosBasicosValidos && direccionValida) {
         this.form.reset()
-        this.crearToast('¡Registro exitoso!')
+        ToastService.crearToast('¡Registro exitoso!')
       } else {
         console.log('registro fallido')
       }
@@ -306,15 +310,5 @@ export default class Registro {
     const contenedor = input.nextElementSibling
     contenedor.textContent = ''
     contenedor.className = 'error'
-  }
-
-  crearToast(msj) {
-    const toast = document.createElement('div')
-    toast.textContent = msj
-    toast.className = 'toast'
-    document.getElementById('vista').appendChild(toast)
-    setTimeout(() => {
-      document.getElementById('vista').removeChild(toast)
-    }, 5000)
   }
 }
