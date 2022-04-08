@@ -11,3 +11,22 @@
 .border {
   border: 1px solid var(--light-border);
 }
+
+.frame {
+  background-color: var(--bg-lighter);
+  border-radius: var(--border-radius);
+  margin-top: 15px;
+  padding: 14px 18px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: var(--bg-success);
+  border: 1px solid var(--text-success);
+  color: var(--text-success);
+  box-shadow: var(--sm-shadow);
+  z-index: 999;
+}

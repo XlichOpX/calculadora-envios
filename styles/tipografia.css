@@ -1,0 +1,8 @@
+h1 {
+  font-size: 1.75em;
+}
+
+hr {
+  margin-top: 0;
+  border-color: var(--bg-dark);
+}

@@ -1,0 +1,70 @@
+select:invalid {
+  color: var(--dimmed);
+}
+
+option {
+  color: var(--text-dark);
+}
+
+option:disabled {
+  color: var(--dimmed);
+}
+
+form legend {
+  font-size: large;
+  width: 100%;
+}
+
+form legend::after {
+  content: "";
+  width: 100%;
+  display: block;
+  border-top: 1px solid var(--bg-dark);
+}
+
+[type="text"],
+select,
+.button {
+  border-radius: var(--border-radius);
+}
+
+.input-group > :first-child {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.input-group-label:last-child {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.button {
+  background: var(--primary-gradient);
+  box-shadow: var(--sm-shadow), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  color: var(--text-dark);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+  font-weight: bold;
+}
+
+.button:hover {
+  color: var(--text-dark);
+  background: var(--primary-gradient-hover);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.error {
+  display: block;
+  background-color: var(--bg-error);
+  color: var(--text-error);
+}
+
+.error.active {
+  padding: 0.5em;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--text-error);
+  border-radius: var(--border-radius);
+}
