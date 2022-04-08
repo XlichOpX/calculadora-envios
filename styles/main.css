@@ -87,11 +87,12 @@ hr {
   border-color: var(--bg-dark);
 }
 
-form h2 {
+form legend {
   font-size: large;
+  width: 100%;
 }
 
-form h2::after {
+form legend::after {
   content: '';
   width: 100%;
   display: block;
