@@ -23,13 +23,13 @@ export default class Registro {
 
     // Cuando el usuario seleccione un estado, actualizar
     // los selects de municipios y parroquias
-    this.direccion["estado"].addEventListener("input", (e) => {
+    this.direccion["estado"].addEventListener("input", () => {
       this.actMunicipios();
       this.actParroquias();
     });
 
     // Cuando el usuario seleccione un municipio, actualizar las parroquias
-    this.direccion["municipio"].addEventListener("input", (e) => {
+    this.direccion["municipio"].addEventListener("input", () => {
       this.actParroquias();
     });
 
@@ -39,31 +39,31 @@ export default class Registro {
 
   aggListeners() {
     // Agg los listeners a cada input para validarlos cuando el usuario escriba en ellos
-    this.datosBasicos["nombres"].addEventListener("input", (e) => {
+    this.datosBasicos["nombres"].addEventListener("input", () => {
       this.validarNombreApellido(this.datosBasicos["nombres"]);
     });
 
-    this.datosBasicos["apellidos"].addEventListener("input", (e) => {
+    this.datosBasicos["apellidos"].addEventListener("input", () => {
       this.validarNombreApellido(this.datosBasicos["apellidos"]);
     });
 
-    this.datosBasicos["cedula"].addEventListener("input", (e) => {
+    this.datosBasicos["cedula"].addEventListener("input", () => {
       this.validarCedula();
     });
 
-    this.datosBasicos["telefono"].addEventListener("input", (e) => {
+    this.datosBasicos["telefono"].addEventListener("input", () => {
       this.validarTelefono();
     });
 
-    this.datosBasicos["email"].addEventListener("input", (e) => {
+    this.datosBasicos["email"].addEventListener("input", () => {
       this.validarEmail();
     });
 
-    this.datosBasicos["sexo"].addEventListener("input", (e) => {
+    this.datosBasicos["sexo"].addEventListener("input", () => {
       this.validarSexo();
     });
 
-    this.direccion["estado"].addEventListener("input", (e) => {
+    this.direccion["estado"].addEventListener("input", () => {
       this.validarEstado();
       // Debido a que automaticamente se seleccionan municipio
       // y parroquia al seleccionar estado, validar para
@@ -72,19 +72,19 @@ export default class Registro {
       this.validarParroquia();
     });
 
-    this.direccion["municipio"].addEventListener("input", (e) => {
+    this.direccion["municipio"].addEventListener("input", () => {
       this.validarMunicipio();
     });
 
-    this.direccion["parroquia"].addEventListener("input", (e) => {
+    this.direccion["parroquia"].addEventListener("input", () => {
       this.validarParroquia();
     });
 
-    this.direccion["calle"].addEventListener("input", (e) => {
+    this.direccion["calle"].addEventListener("input", () => {
       this.validarCalle();
     });
 
-    this.direccion["casa-edificio"].addEventListener("input", (e) => {
+    this.direccion["casa-edificio"].addEventListener("input", () => {
       this.validarCasa();
     });
 
