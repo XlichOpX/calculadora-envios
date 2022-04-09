@@ -17,19 +17,22 @@ document.querySelectorAll(".navbar-nav a").forEach((link) => {
     // Cambiar a la vista referenciada en el atributo href del link clickeado
     Utilidades.cambiarVista(e.target.attributes.href.value).then(() => {
       switch (e.target.attributes.href.value) {
-        case "./views/calculadora.html":
-          let calculadora = new CalculadoraCostosEnvios();
+        case "./views/calculadora.html": {
+          const calculadora = new CalculadoraCostosEnvios();
           calculadora.iniciar();
           break;
+        }
 
-        case "./views/registro.html":
-          let registro = new Registro();
+        case "./views/registro.html": {
+          const registro = new Registro();
           registro.iniciar();
           break;
+        }
 
-        default:
+        default: {
           console.log("Ruta inválida");
           break;
+        }
       }
     });
   });
