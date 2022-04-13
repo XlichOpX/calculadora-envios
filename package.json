@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "eslint": "8.13.0",
