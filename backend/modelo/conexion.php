@@ -1,4 +1,5 @@
 <?php
+
 class Conexion
 {
     private $datos_conexion;
@@ -7,7 +8,7 @@ class Conexion
     function __construct()
     {
         // obtener datos de la conexion desde el archivo config
-        $this->datos_conexion = file_get_contents("../config");
+        $this->datos_conexion = file_get_contents("config");
         // transformarlos a un array map
         $this->datos_conexion = json_decode($this->datos_conexion, true)["conexion"];
 
@@ -36,7 +37,7 @@ class Conexion
     // ":nombre" => "valor"
     // donde ":nombre" debe ser un placeholder valido
     // en la queryString
-    function obtener(string $query, $params = [])
+    function query(string $query, $params = [])
     {
         $stmt = $this->conexion->prepare($query);
 
@@ -46,20 +47,20 @@ class Conexion
         }
 
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // metodo base para ejecutar querys en un id dado
-    function queryEnId(string $query, int $id)
+    // metodo base para realizar inserts
+    function insert(string $query, $params = [])
     {
         $stmt = $this->conexion->prepare($query);
 
         // bindear los parametros dados a la query
-        $stmt->bindParam(":id", $id);
+        foreach ($params as $key => $value) {
+            $stmt->bindParam($key, $value);
+        }
 
         $stmt->execute();
-
-        // devuelve el numero de filas afectadas
-        return $stmt->rowCount();
+        return $this->conexion->lastInsertId();
     }
 }
