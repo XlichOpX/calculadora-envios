@@ -23,7 +23,6 @@ class Usuarios extends Conexion
                 apodo,
                 correo_electronico,
                 clave,
-                prefijo_clave,
                 nombre,
                 apellido,
                 cedula,
@@ -33,12 +32,10 @@ class Usuarios extends Conexion
                 :apodo,
                 :correo_electronico,
                 :clave,
-                :prefijo_clave,
                 :nombre,
                 :apellido,
                 :cedula,
                 :fecha_nacimiento,
-                :activo,
             )";
 
         return $this->insert($query, $datos);
