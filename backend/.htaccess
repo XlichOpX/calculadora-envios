@@ -1,5 +1,17 @@
 RewriteEngine On
 
+# Hacer opcional la ext .php 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+# Hacer opcional la ext .html 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+
+# Redirigir cualquier request que no sea para
+# un archivo o directorio al index
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+?)/?$ index.php?url=$1 [L,QSA]
