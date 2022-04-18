@@ -20,7 +20,6 @@ class Usuarios extends Conexion
     {
         // datos requeridos
         $requeridos = [
-            "apodo" => PDO::PARAM_STR,
             "correo_electronico" => PDO::PARAM_STR,
             "clave" => PDO::PARAM_STR,
             "nombre" => PDO::PARAM_STR,
@@ -44,7 +43,7 @@ class Usuarios extends Conexion
             $params[] = ["nombre" => $nombre, "valor" => $datos[$nombre], "tipo" => $tipo];
         }
 
-        $query = "INSERT INTO usuarios(apodo, correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento) VALUES (:apodo, :correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento)";
+        $query = "INSERT INTO usuarios(correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento) VALUES (:correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento)";
 
         return $this->insert($query, $params);
     }
