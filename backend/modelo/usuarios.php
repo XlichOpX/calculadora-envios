@@ -7,7 +7,7 @@ class Usuarios extends Conexion
     function obtenerUsuario($id)
     {
         $query = "SELECT * FROM usuarios WHERE id = :id";
-        return $this->query($query, [":id" => $id]);
+        return $this->query($query, [["nombre" => "id", "valor" => $id, "tipo" => PDO::PARAM_INT]]);
     }
 
     function obtenerUsuarios()

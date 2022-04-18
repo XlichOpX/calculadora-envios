@@ -33,17 +33,18 @@ class Conexion
     }
 
     // metodo base para obtener filas de la BD
-    // recibe un array de parametros nombrados en la forma
-    // ":nombre" => "valor"
-    // donde ":nombre" debe ser un placeholder valido
-    // en la queryString
+    // recibe un array de arrays donde cada uno es un
+    // array map de la forma
+    // ["nombre" => "nombre", "valor" => "valor", "tipo" => "tipo"]
+    // donde nombre es el placeholder en la query y tipo es una de las constantes
+    // PDO::PARAM_*
     function query(string $query, $params = [])
     {
         $stmt = $this->conexion->prepare($query);
 
         // bindear los parametros dados a la query
-        foreach ($params as $key => $value) {
-            $stmt->bindParam($key, $value);
+        foreach ($params as $param) {
+            $stmt->bindParam($param["nombre"], $param["valor"], $param["tipo"]);
         }
 
         $stmt->execute();
@@ -56,8 +57,8 @@ class Conexion
         $stmt = $this->conexion->prepare($query);
 
         // bindear los parametros dados a la query
-        foreach ($params as $key => $value) {
-            $stmt->bindParam($key, $value);
+        foreach ($params as $param) {
+            $stmt->bindParam($param["nombre"], $param["valor"], $param["tipo"]);
         }
 
         $stmt->execute();
