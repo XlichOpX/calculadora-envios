@@ -1,6 +1,6 @@
 <?php
 
-require "modelo/conexion.php";
+require "./modelo/conexion.php";
 
 class Usuarios extends Conexion
 {

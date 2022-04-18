@@ -1,5 +1,5 @@
 <?php
-require_once "modelo/usuarios.php";
+require_once "./modelo/usuarios.php";
 $usuarios = new Usuarios();
 
 // si se ha indicado un id

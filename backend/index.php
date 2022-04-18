@@ -5,5 +5,5 @@
 parse_str($_SERVER["QUERY_STRING"], $params);
 
 if ($params['url'] === 'usuarios') {
-    require_once "controlador/usuarios.php";
+    require_once "./controlador/usuarios.php";
 }
