@@ -18,26 +18,34 @@ class Usuarios extends Conexion
 
     function crearUsuario($datos)
     {
-        $query = "
-            INSERT INTO usuarios(
-                apodo,
-                correo_electronico,
-                clave,
-                nombre,
-                apellido,
-                cedula,
-                fecha_nacimiento
-            )
-            VALUES(
-                :apodo,
-                :correo_electronico,
-                :clave,
-                :nombre,
-                :apellido,
-                :cedula,
-                :fecha_nacimiento,
-            )";
+        // datos requeridos
+        $requeridos = [
+            "apodo" => PDO::PARAM_STR,
+            "correo_electronico" => PDO::PARAM_STR,
+            "clave" => PDO::PARAM_STR,
+            "nombre" => PDO::PARAM_STR,
+            "apellido" => PDO::PARAM_STR,
+            "cedula" => PDO::PARAM_STR,
+            "fecha_nacimiento" => PDO::PARAM_STR
+        ];
 
-        return $this->insert($query, $datos);
+        // verifica que existan todos los datos requeridos
+        foreach ($requeridos as $nombre => $tipo) {
+            if (!isset($datos[$nombre])) {
+                return "Error: datos incompletos";
+            }
+        }
+
+        // aplicar hash a la clave antes de llevarla a la db
+        $datos["clave"] = password_hash($datos["clave"], PASSWORD_DEFAULT);
+
+        // crear array de params para la query
+        foreach ($requeridos as $nombre => $tipo) {
+            $params[] = ["nombre" => $nombre, "valor" => $datos[$nombre], "tipo" => $tipo];
+        }
+
+        $query = "INSERT INTO usuarios(apodo, correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento) VALUES (:apodo, :correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento)";
+
+        return $this->insert($query, $params);
     }
 }
