@@ -1,5 +1,8 @@
 <?php
 
+header('Access-Control-Allow-Origin: http://calc-envios.localhost');
+header('Access-Control-Allow-Credentials: true');
+
 require_once "./modelo/autenticacion.php";
 $autenticacion = new Autenticacion;
 
@@ -19,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // si es falso, borra la cookie y devuelve false
-        setcookie("jwt_token", "", 1, "/");
+        setcookie("jwt_token", "", 1, "/", ".calc-envios.localhost");
         echo json_encode(false);
         exit;
     }

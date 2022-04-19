@@ -33,10 +33,9 @@ class Autenticacion extends Conexion
                 ["sub" => $datosUsuario['id'], "name" => $datosUsuario['nombre'], "exp" => time() + 60 * 60 * 24],
                 "ekisde"
             );
-            setcookie("jwt_token", $jwt, time() + 60 * 60 * 24, "/");
+            setcookie("jwt_token", $jwt, time() + 60 * 60 * 24, "/", ".calc-envios.localhost");
             return $jwt;
         }
-
         return "Los datos de acceso no son correctos";
     }
 

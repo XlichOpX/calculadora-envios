@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: http://calc-envios.localhost');
+header('Access-Control-Allow-Credentials: true');
 
 // parsar la query string y almacenar sus elementos
 // en $params
