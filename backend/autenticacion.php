@@ -30,10 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // obtener el body de la request y pasarlo a un array map
     $body = json_decode(file_get_contents("php://input"), true);
 
-    // verificar los datos del body
-    $respuesta = $autenticacion->iniciarSesion($body);
+    // valida los datos y genera un token
+    $respuestaJwt = $autenticacion->iniciarSesion($body);
 
-    echo json_encode($respuesta);
+    if ($respuestaJwt) {
+        setcookie("jwt_token", $respuestaJwt, time() + 60 * 60 * 24, "/", ".calc-envios.localhost");
+        echo json_encode(true);
+        exit;
+    }
+
+    echo json_encode(false);
     exit;
 }
 
