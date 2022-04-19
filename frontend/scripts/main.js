@@ -1,11 +1,12 @@
 import CalculadoraCostosEnvios from "./calculadora.js";
 import Registro from "./registro.js";
 import Utilidades from "./utilidades.js";
+import Login from "./login.js";
 
 // Por defecto iniciar en la vista de calculadora
-Utilidades.cambiarVista("../views/calculadora.html").then(() => {
-  let calculadora = new CalculadoraCostosEnvios();
-  calculadora.iniciar();
+Utilidades.cambiarVista("../views/login.html").then(() => {
+  const login = new Login();
+  login.iniciar();
 });
 
 // Al hacer click en un link de la navbar cambiar a la vista correspondiente
@@ -17,6 +18,12 @@ document.querySelectorAll(".navbar-nav a").forEach((link) => {
     // Cambiar a la vista referenciada en el atributo href del link clickeado
     Utilidades.cambiarVista(e.target.attributes.href.value).then(() => {
       switch (e.target.attributes.href.value) {
+        case "./views/login.html": {
+          const login = new Login();
+          login.iniciar();
+          break;
+        }
+
         case "./views/calculadora.html": {
           const calculadora = new CalculadoraCostosEnvios();
           calculadora.iniciar();
