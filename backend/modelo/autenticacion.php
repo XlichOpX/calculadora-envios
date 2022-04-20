@@ -16,7 +16,7 @@ class Autenticacion extends Conexion
         // verifica que los datos esten completos
         if (!isset($datos["usuario"]) || !isset($datos["clave"])) {
             $respuesta = new Respuesta;
-            return $respuesta->status400("Datos incompletos");;
+            return $respuesta->status400("Datos incompletos");
         }
 
         // para legibilidad
@@ -30,8 +30,7 @@ class Autenticacion extends Conexion
         if ($datosUsuario && password_verify($clave, $datosUsuario["clave"])) {
             $jwt = $this->generarJWT(
                 ["alg" => "HS256", "typ" => "JWT"],
-                ["sub" => $datosUsuario['id'], "name" => $datosUsuario['nombre'], "exp" => time() + 60 * 60 * 24],
-                "ekisde"
+                ["sub" => $datosUsuario['id'], "name" => $datosUsuario['nombre'], "exp" => time() + 60 * 60 * 24]
             );
             return $jwt;
         }
