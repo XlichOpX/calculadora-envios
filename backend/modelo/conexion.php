@@ -3,7 +3,7 @@
 class Conexion
 {
     private $datos_conexion;
-    private $conexion;
+    protected $conexion;
 
     function __construct()
     {
