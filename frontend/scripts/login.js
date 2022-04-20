@@ -1,7 +1,8 @@
 import Validadores from "./validadores.js";
+import Autenticacion from "./autenticacion.js";
 
 export default class Login {
-  iniciar() {
+  constructor() {
     this.login = document.getElementById("login");
     this.correo = document.getElementById("correo");
     this.clave = document.getElementById("clave");
@@ -12,7 +13,7 @@ export default class Login {
     });
   }
 
-  validar() {
+  async validar() {
     if (!this.correo.value || !this.clave.value) {
       alert("Todos los campos son requeridos!");
       return;
@@ -22,31 +23,16 @@ export default class Login {
       alert("Introduce un correo válido!");
       return;
     }
+    const valido = await Autenticacion.validarAcceso(
+      this.correo.value,
+      this.clave.value
+    );
 
-    this.validarAcceso();
-  }
-
-  validarAcceso() {
-    const request = new XMLHttpRequest();
-    request.open("POST", "http://calc-envios.localhost:3000/autenticacion");
-
-    // para permitir las cookies
-    request.withCredentials = true;
-
-    // envia los datos de acceso en un blob
-    const data = new Blob([
-      JSON.stringify({ usuario: this.correo.value, clave: this.clave.value }),
-    ]);
-    request.send(data);
-
-    // al terminar la request
-    request.addEventListener("load", () => {
-      if (request.response === "true") {
-        alert("Datos validos");
-        return;
-      }
-      alert("Datos invalidos");
+    if (valido) {
+      window.location.href = "/calculadora";
       return;
-    });
+    }
+
+    alert("Datos de acceso incorrectos!");
   }
 }

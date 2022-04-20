@@ -7,8 +7,6 @@ import Paquete from "./paquete.js";
 export default class CalculadoraCostosEnvios {
   constructor() {
     this.inputs = document.getElementById("formulario").elements;
-  }
-  iniciar() {
     // Obtener el input peso del paquete
     const inputPeso = this.inputs["peso"];
 
