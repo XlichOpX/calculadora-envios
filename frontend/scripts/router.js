@@ -3,6 +3,13 @@ import Login from "./login.js";
 import Registro from "./registro.js";
 import Autenticacion from "./autenticacion.js";
 
+// agg listeners a los links de la nav
+document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
+  enlace.addEventListener("click", (e) => {
+    enrutar(e);
+  });
+});
+
 // usada para enrutar desde los links
 const enrutar = (event) => {
   event = event || window.event;
@@ -58,9 +65,6 @@ const manejarUbicacion = async () => {
 
 // manejar el routing cuando el usuario usa los botones de ir atras o adelante
 window.onpopstate = manejarUbicacion;
-
-// hacer que el router sea accesible globalmente
-window.route = enrutar;
 
 // manejar la ubicacion por primera vez al iniciar la app
 manejarUbicacion();
