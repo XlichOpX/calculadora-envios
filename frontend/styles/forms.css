@@ -41,8 +41,8 @@ select,
   box-shadow: var(--sm-shadow), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
   color: var(--text-dark);
   border: 1px solid rgba(0, 0, 0, 0.3);
-  text-transform: capitalize;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
   font-weight: bold;
 }
 
