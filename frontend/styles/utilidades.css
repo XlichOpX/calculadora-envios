@@ -30,3 +30,7 @@
   box-shadow: var(--sm-shadow);
   z-index: 999;
 }
+
+.oculto {
+  display: none;
+}

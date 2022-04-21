@@ -3,6 +3,7 @@ import Login from "./login.js";
 import Registro from "./registro.js";
 import Autenticacion from "./autenticacion.js";
 import Logout from "./logout.js";
+import Navbar from "./navbar.js";
 
 // agg listeners a los links de la nav
 document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
@@ -61,18 +62,31 @@ const manejarUbicacion = async () => {
   // asociarla con una de las rutas de la app o en su defecto la ruta 404
   let ruta = rutas[path] || rutas[404];
 
-  // si la ruta esta config para redirigir a otra, redirige a la ruta especificada
-  if (ruta.redirigir) {
-    window.location.href = ruta.redirigir;
+  const tokenValido = await Autenticacion.validarToken();
+
+  if (!tokenValido) {
+    // mostrar registro y login, esconder logout
+    Navbar.noLogeado();
+
+    if (path !== "/login" && ruta.bloqueada) {
+      window.location.href = "/login";
+      return;
+    }
+  } else {
+    // esconder registro y login de la navbar
+    Navbar.logeado();
+  }
+
+  // si la ruta es el login y el usuario esta logeado con un token valido
+  // se le redirige a la calculadora
+  if (path === "/login" && tokenValido) {
+    window.location.href = "/calculadora";
     return;
   }
 
-  // si la ruta esta bloqueada, verifica que el usuario este logeado para acceder
-  const restringido = ruta.bloqueada && !(await Autenticacion.validarToken());
-
-  // si el usuario no esta logeado, se le redirige al login
-  if (restringido) {
-    window.location.href = "/login";
+  // si la ruta esta config para redirigir a otra, redirige a la ruta especificada
+  if (ruta.redirigir) {
+    window.location.href = ruta.redirigir;
     return;
   }
 
