@@ -26,15 +26,26 @@ const enrutar = (event) => {
 
 // rutas de la app
 const rutas = {
-  404: { path: "/views/404.html" },
-  "/": { path: "/views/login.html", disparador: Login },
+  404: { path: "/views/404.html", nombre: "404 - Página no encontrada" },
+  "/": {
+    redirigir: "/calculadora",
+  },
   "/calculadora": {
     path: "/views/calculadora.html",
+    nombre: "Calculadora",
     disparador: Calculadora,
     bloqueada: true,
   },
-  "/login": { path: "/views/login.html", disparador: Login },
-  "/registro": { path: "/views/registro.html", disparador: Registro },
+  "/login": {
+    path: "/views/login.html",
+    nombre: "Iniciar sesión",
+    disparador: Login,
+  },
+  "/registro": {
+    path: "/views/registro.html",
+    nombre: "Registro",
+    disparador: Registro,
+  },
 };
 
 const manejarUbicacion = async () => {
@@ -43,6 +54,12 @@ const manejarUbicacion = async () => {
 
   // asociarla con una de las rutas de la app o en su defecto la ruta 404
   let ruta = rutas[path] || rutas[404];
+
+  // si la ruta esta config para redirigir a otra, redirige a la ruta especificada
+  if (ruta.redirigir) {
+    window.location.href = ruta.redirigir;
+    return;
+  }
 
   // si la ruta esta bloqueada, verifica que el usuario este logeado para acceder
   const restringido = ruta.bloqueada && !(await Autenticacion.validarToken());
@@ -58,6 +75,9 @@ const manejarUbicacion = async () => {
 
   // introducirlo a la vista
   document.getElementById("vista").innerHTML = html;
+
+  // poner el nombre de la ruta en el title de la pag
+  document.title = ruta.nombre;
 
   // ejecutar el constructor del objeto que maneja la vista para iniciar su JS
   if (ruta.disparador) {
