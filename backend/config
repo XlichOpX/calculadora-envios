@@ -1,9 +1,8 @@
 {
-    "conexion": {
-        "host": "localhost",
-        "user": "root",
-        "password": "12801024500",
-        "database": "inu_calc_envios",
-        "port": "3306"
-    }
+  "conexion": {
+    "host": "localhost",
+    "user": "root",
+    "database": "inu_calc_envios",
+    "port": "3306"
+  }
 }

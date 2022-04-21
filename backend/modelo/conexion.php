@@ -24,8 +24,7 @@ class Conexion
         try {
             $this->conexion = new PDO(
                 $dsn,
-                $this->datos_conexion['user'],
-                $this->datos_conexion['password']
+                $this->datos_conexion['user']
             );
         } catch (PDOException $err) {
             echo "Error: {$err->getMessage()}";
