@@ -39,15 +39,32 @@ class Usuarios extends Conexion
             "referencia" => PDO::PARAM_STR,
         ];
 
-        // verifica que existan todos los datos requeridos
+        // preguntas de seguridad requeridas
+        $requeridos_preguntas = [
+            "pregunta1" => PDO::PARAM_STR,
+            "pregunta2" => PDO::PARAM_STR,
+            "pregunta3" => PDO::PARAM_STR,
+            "respuesta1" => PDO::PARAM_STR,
+            "respuesta2" => PDO::PARAM_STR,
+            "respuesta3" => PDO::PARAM_STR,
+        ];
+
+        // verifica que existan los datos requeridos del usuario
         foreach ($requeridos_usuario as $nombre => $tipo) {
             if (!isset($datos[$nombre])) {
                 return "Error: datos incompletos"  . $nombre;
             }
         }
 
-        // verifica que existan todos los datos requeridos
+        // verifica que existan los datos requeridos de direccion
         foreach ($requeridos_direccion as $nombre => $tipo) {
+            if (!isset($datos[$nombre])) {
+                return "Error: datos incompletos: " . $nombre;
+            }
+        }
+
+        // verifica que existan las preguntas requeridas
+        foreach ($requeridos_preguntas as $nombre => $tipo) {
             if (!isset($datos[$nombre])) {
                 return "Error: datos incompletos: " . $nombre;
             }
@@ -82,6 +99,21 @@ class Usuarios extends Conexion
 
         // insertar direccion
         $this->insert($query, $params);
+
+        // query para insertar preguntas
+        $query = "INSERT INTO preguntas_seguridad(id_usuario, pregunta, respuesta) VALUES (:id_usuario, :pregunta, :respuesta)";
+
+
+        // insertar las preguntas
+        for ($i = 1; $i <= 3; $i++) {
+            // vaciar params
+            $params = [];
+            $params[] = ["nombre" => "id_usuario", "valor" => $id_usuario, "tipo" => PDO::PARAM_INT];
+            $params[] = ["nombre" => "pregunta", "valor" => $datos["pregunta" . $i], "tipo" => PDO::PARAM_STR];
+            $params[] = ["nombre" => "respuesta", "valor" => password_hash($datos["respuesta" . $i], PASSWORD_DEFAULT), "tipo" => PDO::PARAM_STR];
+            // insertar pregunta
+            $this->insert($query, $params);
+        }
 
         // finalizar transaccion y retornar resultado
         return $this->conexion->commit();
