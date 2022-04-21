@@ -125,44 +125,40 @@ export default class Registro {
   }
 
   // Crea un elemento option y lo agg al select dado
-  aggOption(select, content, value) {
+  aggOption(select, contenido, valor) {
     const opcion = document.createElement("option");
-    opcion.textContent = content;
-    opcion.value = value;
+    opcion.textContent = contenido;
+    opcion.value = valor;
     select.appendChild(opcion);
   }
 
-  validarInputs(formModel) {
+  // recorre un array de arrays, donde cada array contiene una ref a un input
+  // y un array de validadores
+  validarInputs(modeloForm) {
+    // por defecto el form es valido hasta que se demuestre lo contrario
     let formValido = true;
-    for (let i = 0; i < formModel.length; i++) {
-      const inputModel = formModel[i];
-      for (let j = 0; j < inputModel[1].length; j++) {
-        const validador = inputModel[1][j];
 
-        if (!validador(inputModel[0].value)) {
-          this.mostrarError(inputModel[0]);
+    for (let i = 0; i < modeloForm.length; i++) {
+      const modeloInput = modeloForm[i];
+
+      // recorres los validadores
+      for (let j = 0; j < modeloInput[1].length; j++) {
+        const validador = modeloInput[1][j];
+
+        // si no es valido, muestra el error y pasa a recorrer los validadores del sig input
+        if (!validador(modeloInput[0].value)) {
+          this.mostrarError(modeloInput[0]);
+
+          // el form ya no es valido
           formValido = false;
           break;
         }
-        this.borrarError(inputModel[0]);
+
+        // si el input cumple con todos sus validadores, borra sus errores
+        this.borrarError(modeloInput[0]);
       }
     }
     return formValido;
-  }
-
-  // Valida el input dado con los parámetros dados
-  // Si no es válido, muestra el msj de error dado
-  validarInput(input, msjError, validadores) {
-    const value = input.value;
-    for (let i = 0; i < validadores.length; i++) {
-      const validador = validadores[i];
-      if (!validador(value)) {
-        this.mostrarError(input, msjError);
-        return false;
-      }
-    }
-    this.borrarError(input);
-    return true;
   }
 
   // Coloca el msj de error en el elemento especificado
