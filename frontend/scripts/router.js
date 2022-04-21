@@ -26,7 +26,7 @@ const enrutar = (event) => {
 
 // rutas de la app
 const rutas = {
-  404: { path: "/views/login.html", disparador: Login },
+  404: { path: "/views/404.html" },
   "/": { path: "/views/login.html", disparador: Login },
   "/calculadora": {
     path: "/views/calculadora.html",
@@ -60,7 +60,9 @@ const manejarUbicacion = async () => {
   document.getElementById("vista").innerHTML = html;
 
   // ejecutar el constructor del objeto que maneja la vista para iniciar su JS
-  new ruta.disparador();
+  if (ruta.disparador) {
+    new ruta.disparador();
+  }
 };
 
 // manejar el routing cuando el usuario usa los botones de ir atras o adelante
