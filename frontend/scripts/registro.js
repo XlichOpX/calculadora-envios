@@ -10,7 +10,7 @@ export default class Registro {
     this.form = document.getElementById("form-registro");
     this.inputsForm = document.getElementById("form-registro").elements;
 
-    this.camposValidados = [
+    this.modeloForm = [
       [this.inputsForm["nombre"], [Validadores.requerido, Validadores.nombre]],
       [
         this.inputsForm["apellido"],
@@ -24,6 +24,12 @@ export default class Registro {
       ],
       [this.inputsForm["email"], [Validadores.requerido, Validadores.email]],
       [this.inputsForm["clave"], [Validadores.requerido, Validadores.clave]],
+      [this.inputsForm["pregunta1"], [Validadores.requerido]],
+      [this.inputsForm["respuesta1"], [Validadores.requerido]],
+      [this.inputsForm["pregunta2"], [Validadores.requerido]],
+      [this.inputsForm["respuesta2"], [Validadores.requerido]],
+      [this.inputsForm["pregunta3"], [Validadores.requerido]],
+      [this.inputsForm["respuesta3"], [Validadores.requerido]],
       [this.inputsForm["estado"], [Validadores.requerido]],
       [this.inputsForm["municipio"], [Validadores.requerido]],
       [this.inputsForm["parroquia"], [Validadores.requerido]],
@@ -56,7 +62,7 @@ export default class Registro {
     this.form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      if (this.validarInputs(this.camposValidados)) {
+      if (this.validarInputs(this.modeloForm)) {
         const datos = Object.fromEntries(new FormData(e.target));
 
         const conexion = new Conexion();
@@ -64,6 +70,7 @@ export default class Registro {
         const exito = await conexion.crearUsuario(datos);
 
         if (exito == true) {
+          this.form.reset();
           ToastService.crearToast("¡Registro exitoso!");
           window.location.href = "/login";
           return;
