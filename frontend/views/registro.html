@@ -17,7 +17,7 @@
           placeholder="Yhan Carlos"
         />
         <span class="error">
-          Este campo es requerido y debe tener menos de 50 caracteres
+          Requerido. Debe tener menos de 50 caracteres.
         </span>
       </div>
 
@@ -30,22 +30,20 @@
           placeholder="Montaño Vargas"
         />
         <span class="error">
-          Este campo es requerido y debe tener menos de 50 caracteres
+          Requerido. Debe tener menos de 50 caracteres.
         </span>
       </div>
 
       <div class="cell medium-6">
         <label for="cedula">Cédula</label>
         <input type="text" id="cedula" name="cedula" placeholder="V29784799" />
-        <span class="error">
-          Este campo es requerido y debe coincidir con el formato VXXXXXXXX
-        </span>
+        <span class="error">Debe coincidir con el formato VXXXXXXXX</span>
       </div>
 
       <div class="cell medium-6">
         <label for="fecha">Fecha de nacimiento</label>
         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
 
       <div class="cell medium-6">
@@ -57,8 +55,7 @@
           placeholder="04141327382"
         />
         <span class="error">
-          Este campo es requerido y debe coincidir con el formato 0XXXXXXXXXX.
-          Ejemplo: 04141327382
+          Debe coincidir con el formato 0XXXXXXXXXX. Ejemplo: 04141327382
         </span>
       </div>
 
@@ -71,15 +68,17 @@
           placeholder="yhan.carlos2001@gmail.com"
         />
         <span class="error">
-          Este campo es requerido y debe ser un email válido. Ejemplo:
-          yhan.carlos2001@gmail.com
+          Debe ser un email válido. Ejemplo: yhan.carlos2001@gmail.com
         </span>
       </div>
 
       <div class="cell medium-6">
         <label for="clave">Contraseña</label>
         <input type="password" id="clave" name="clave" />
-        <span class="error">Este campo es requerido</span>
+        <span class="error"
+          >Debe tener al menos: 8 caracteres, una mayúscula, una minúscula y un
+          número.</span
+        >
       </div>
     </fieldset>
 
@@ -96,19 +95,19 @@
         <select id="estado" name="id_estado">
           <option value="" selected disabled></option>
         </select>
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
 
       <div class="cell medium-6">
         <label for="municipio">Municipio</label>
         <select id="municipio" name="id_municipio"></select>
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
 
       <div class="cell medium-6">
         <label for="parroquia">Parroquia</label>
         <select id="parroquia" name="id_parroquia"></select>
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
 
       <div class="cell medium-6">
@@ -119,7 +118,7 @@
           name="calle"
           placeholder="Esq. Guayabal a Sordo"
         />
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
 
       <div class="cell medium-6">
@@ -130,7 +129,7 @@
           name="referencia"
           placeholder="Edif. Amanecer"
         />
-        <span class="error">Este campo es requerido</span>
+        <span class="error">Requerido.</span>
       </div>
     </fieldset>
     <button type="submit" class="cell button">Registrarse</button>
