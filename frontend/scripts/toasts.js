@@ -3,9 +3,9 @@ export default class ToastService {
     const toast = document.createElement("div");
     toast.textContent = msj;
     toast.className = "toast";
-    document.getElementById("vista").appendChild(toast);
+    document.firstElementChild.appendChild(toast);
     setTimeout(() => {
-      document.getElementById("vista").removeChild(toast);
+      document.firstElementChild.removeChild(toast);
     }, 5000);
   }
 }

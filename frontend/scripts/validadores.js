@@ -1,6 +1,6 @@
 export default class Validadores {
   // Verifica que el input no esté vacío
-  static noNull(value) {
+  static requerido(value) {
     if (value !== "") return true;
     return false;
   }

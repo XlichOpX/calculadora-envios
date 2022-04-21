@@ -1,7 +1,7 @@
 <div class="frame sm-shadow border">
   <h1 class="text-center">Registro de usuario</h1>
   <hr />
-  <form id="form-registro">
+  <form id="form-registro" novalidate>
     <!-- Fieldset de datos básicos del usuario -->
     <fieldset class="grid-x grid-margin-x" id="datos-basicos">
       <div class="cell">
@@ -9,43 +9,77 @@
       </div>
 
       <div class="cell medium-6">
-        <label for="nombres">Nombres</label>
-        <input type="text" id="nombres" placeholder="Yhan Carlos" />
-        <span class="error"></span>
+        <label for="nombre">Nombres</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Yhan Carlos"
+        />
+        <span class="error">
+          Este campo es requerido y debe tener menos de 50 caracteres
+        </span>
       </div>
 
       <div class="cell medium-6">
-        <label for="apellidos">Apellidos</label>
-        <input type="text" id="apellidos" placeholder="Montaño Vargas" />
-        <span class="error"></span>
+        <label for="apellido">Apellidos</label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          placeholder="Montaño Vargas"
+        />
+        <span class="error">
+          Este campo es requerido y debe tener menos de 50 caracteres
+        </span>
       </div>
 
       <div class="cell medium-6">
         <label for="cedula">Cédula</label>
-        <input type="text" id="cedula" placeholder="V29784799" />
-        <span class="error"></span>
+        <input type="text" id="cedula" name="cedula" placeholder="V29784799" />
+        <span class="error">
+          Este campo es requerido y debe coincidir con el formato VXXXXXXXX
+        </span>
+      </div>
+
+      <div class="cell medium-6">
+        <label for="fecha">Fecha de nacimiento</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
+        <span class="error">Este campo es requerido</span>
       </div>
 
       <div class="cell medium-6">
         <label for="telefono">Teléfono</label>
-        <input type="text" id="telefono" placeholder="04141327382" />
-        <span class="error"></span>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          placeholder="04141327382"
+        />
+        <span class="error">
+          Este campo es requerido y debe coincidir con el formato 0XXXXXXXXXX.
+          Ejemplo: 04141327382
+        </span>
       </div>
 
       <div class="cell medium-6">
         <label for="email">Email</label>
-        <input type="text" id="email" placeholder="yhan.carlos2001@gmail.com" />
-        <span class="error"></span>
+        <input
+          type="text"
+          id="email"
+          name="correo_electronico"
+          placeholder="yhan.carlos2001@gmail.com"
+        />
+        <span class="error">
+          Este campo es requerido y debe ser un email válido. Ejemplo:
+          yhan.carlos2001@gmail.com
+        </span>
       </div>
 
       <div class="cell medium-6">
-        <label for="sexo">Sexo</label>
-        <select id="sexo">
-          <option value="" selected disabled></option>
-          <option value="m">Masculino</option>
-          <option value="f">Femenino</option>
-        </select>
-        <span class="error"></span>
+        <label for="clave">Contraseña</label>
+        <input type="password" id="clave" name="clave" />
+        <span class="error">Este campo es requerido</span>
       </div>
     </fieldset>
 
@@ -55,36 +89,48 @@
         <legend>Dirección</legend>
       </div>
 
+      <input type="hidden" name="id_pais" value="1" required />
+
       <div class="cell medium-6">
         <label for="estado">Estado</label>
-        <select id="estado">
+        <select id="estado" name="id_estado">
           <option value="" selected disabled></option>
         </select>
-        <span class="error"></span>
+        <span class="error">Este campo es requerido</span>
       </div>
 
       <div class="cell medium-6">
         <label for="municipio">Municipio</label>
-        <select id="municipio"></select>
-        <span class="error"></span>
+        <select id="municipio" name="id_municipio"></select>
+        <span class="error">Este campo es requerido</span>
       </div>
 
       <div class="cell medium-6">
         <label for="parroquia">Parroquia</label>
-        <select id="parroquia"></select>
-        <span class="error"></span>
+        <select id="parroquia" name="id_parroquia"></select>
+        <span class="error">Este campo es requerido</span>
       </div>
 
       <div class="cell medium-6">
         <label for="calle">Calle</label>
-        <input type="text" id="calle" placeholder="Esq. Guayabal a Sordo" />
-        <span class="error"></span>
+        <input
+          type="text"
+          id="calle"
+          name="calle"
+          placeholder="Esq. Guayabal a Sordo"
+        />
+        <span class="error">Este campo es requerido</span>
       </div>
 
       <div class="cell medium-6">
         <label for="casa-edificio">Casa o edificio</label>
-        <input type="text" id="casa-edificio" placeholder="Edif. Amanecer" />
-        <span class="error"></span>
+        <input
+          type="text"
+          id="referencia"
+          name="referencia"
+          placeholder="Edif. Amanecer"
+        />
+        <span class="error">Este campo es requerido</span>
       </div>
     </fieldset>
     <button type="submit" class="cell button">Registrarse</button>

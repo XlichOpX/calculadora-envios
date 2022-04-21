@@ -56,12 +56,13 @@ select,
 }
 
 .error {
-  display: block;
+  display: none;
   background-color: var(--bg-error);
   color: var(--text-error);
 }
 
 .error.active {
+  display: block;
   padding: 0.5em;
   margin-top: -1rem;
   margin-bottom: 1rem;
