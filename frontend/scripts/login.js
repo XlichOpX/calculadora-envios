@@ -1,5 +1,6 @@
 import Validadores from "./validadores.js";
 import Autenticacion from "./autenticacion.js";
+import ModeloForm from "./forms.js";
 
 export default class Login {
   constructor() {
@@ -7,22 +8,20 @@ export default class Login {
     this.correo = document.getElementById("correo");
     this.clave = document.getElementById("clave");
 
+    this.modeloForm = new ModeloForm([
+      [this.correo, [Validadores.requerido, Validadores.email]],
+      [this.clave, [Validadores.requerido, Validadores.clave]],
+    ]);
+
     this.login.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.validar();
+      if (this.modeloForm.validarInputs()) {
+        this.validarAcceso();
+      }
     });
   }
 
-  async validar() {
-    if (!this.correo.value || !this.clave.value) {
-      alert("Todos los campos son requeridos!");
-      return;
-    }
-
-    if (!Validadores.email(this.correo.value)) {
-      alert("Introduce un correo válido!");
-      return;
-    }
+  async validarAcceso() {
     const valido = await Autenticacion.validarAcceso(
       this.correo.value,
       this.clave.value
