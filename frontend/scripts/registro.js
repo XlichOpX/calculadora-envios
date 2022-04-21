@@ -23,7 +23,7 @@ export default class Registro {
         [Validadores.requerido, Validadores.telefono],
       ],
       [this.inputsForm["email"], [Validadores.requerido, Validadores.email]],
-      [this.inputsForm["clave"], [Validadores.requerido]],
+      [this.inputsForm["clave"], [Validadores.requerido, Validadores.clave]],
       [this.inputsForm["estado"], [Validadores.requerido]],
       [this.inputsForm["municipio"], [Validadores.requerido]],
       [this.inputsForm["parroquia"], [Validadores.requerido]],

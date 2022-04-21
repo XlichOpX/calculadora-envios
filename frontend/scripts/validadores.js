@@ -27,5 +27,10 @@ export default class Validadores {
     const telefonoRegExp = /^[0]\d{10}/;
     return telefonoRegExp.test(telefono);
   }
+
+  static clave(clave) {
+    // minimo 8 chars, una letra mayuscula, una minuscula y un numero
+    const claveRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    return claveRegExp.test(clave);
   }
 }
