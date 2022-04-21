@@ -2,6 +2,7 @@ import Calculadora from "./calculadora.js";
 import Login from "./login.js";
 import Registro from "./registro.js";
 import Autenticacion from "./autenticacion.js";
+import Logout from "./logout.js";
 
 // agg listeners a los links de la nav
 document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
@@ -40,6 +41,11 @@ const rutas = {
     path: "/views/login.html",
     nombre: "Iniciar sesión",
     disparador: Login,
+  },
+  "/logout": {
+    path: "/views/logout.html",
+    nombre: "Cerrando sesión",
+    disparador: Logout,
   },
   "/registro": {
     path: "/views/registro.html",
