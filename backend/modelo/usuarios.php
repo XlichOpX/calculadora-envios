@@ -52,22 +52,31 @@ class Usuarios extends Conexion
         // verifica que existan los datos requeridos del usuario
         foreach ($requeridos_usuario as $nombre => $tipo) {
             if (!isset($datos[$nombre])) {
-                return "Error: datos incompletos"  . $nombre;
+                http_response_code(400);
+                return ["error" => "Datos incompletos"];
             }
         }
 
         // verifica que existan los datos requeridos de direccion
         foreach ($requeridos_direccion as $nombre => $tipo) {
             if (!isset($datos[$nombre])) {
-                return "Error: datos incompletos: " . $nombre;
+                http_response_code(400);
+                return ["error" => "Datos incompletos"];
             }
         }
 
         // verifica que existan las preguntas requeridas
         foreach ($requeridos_preguntas as $nombre => $tipo) {
             if (!isset($datos[$nombre])) {
-                return "Error: datos incompletos: " . $nombre;
+                http_response_code(400);
+                return ["error" => "Datos incompletos"];
             }
+        }
+
+        // verifica que el email no exista ya en la db
+        if (count($this->query("SELECT id FROM usuarios WHERE correo_electronico = :correo", [["nombre" => "correo", "valor" => $datos["correo_electronico"], "tipo" => PDO::PARAM_STR]])) > 0) {
+            http_response_code(400);
+            return ["error" => "El correo indicado ya está registrado"];
         }
 
         // aplicar hash a la clave antes de llevarla a la db
@@ -116,6 +125,13 @@ class Usuarios extends Conexion
         }
 
         // finalizar transaccion y retornar resultado
-        return $this->conexion->commit();
+        $resultado = $this->conexion->commit();
+        if ($resultado) {
+            http_response_code(201);
+            return ["status" => 201];
+        }
+
+        http_response_code(500);
+        return ["error" => "Ocurrió un error inesperado al crear el usuario"];
     }
 }

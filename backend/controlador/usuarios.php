@@ -15,11 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             exit;
         }
 
-        echo "id invalido";
+        http_response_code(404);
+        echo json_encode(["error" => "El usuario solicitado no existe."]);
         exit;
     }
 
     // si no se especifica un id, devuelve los usuarios
+    http_response_code(200);
     echo json_encode($usuarios->obtenerUsuarios());
     exit;
 }
@@ -29,5 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // obtener el body de la request y transformarlo a un array map
     $body = json_decode(file_get_contents("php://input"), true);
 
-    echo $usuarios->crearUsuario($body);
+
+    echo json_encode($usuarios->crearUsuario($body));
 }
