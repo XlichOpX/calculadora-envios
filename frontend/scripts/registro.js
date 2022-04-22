@@ -62,21 +62,25 @@ export default class Registro {
     this.form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      // si el form es valido
       if (this.validarInputs(this.modeloForm)) {
+        // obtener sus datos
         const datos = Object.fromEntries(new FormData(e.target));
 
         const conexion = new Conexion();
 
+        // enviar la peticion para crear usuario
         const exito = await conexion.crearUsuario(datos);
 
-        if (exito == true) {
+        // si es exitosa redirige al login
+        if (exito.status === 201) {
           this.form.reset();
           ToastService.crearToast("¡Registro exitoso!");
           window.location.href = "/login";
           return;
         }
 
-        ToastService.crearToast("¡Registro fallido!");
+        ToastService.crearToast(exito.error);
       }
     });
   }
