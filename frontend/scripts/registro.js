@@ -3,6 +3,7 @@ import ToastService from "./toasts.js";
 import Utilidades from "./utilidades.js";
 import Validadores from "./validadores.js";
 import Conexion from "./conexion.js";
+import ModeloForm from "./forms.js";
 
 export default class Registro {
   constructor() {
@@ -10,7 +11,7 @@ export default class Registro {
     this.form = document.getElementById("form-registro");
     this.inputsForm = document.getElementById("form-registro").elements;
 
-    this.modeloForm = [
+    this.modeloForm = new ModeloForm([
       [this.inputsForm["nombre"], [Validadores.requerido, Validadores.nombre]],
       [
         this.inputsForm["apellido"],
@@ -35,7 +36,7 @@ export default class Registro {
       [this.inputsForm["parroquia"], [Validadores.requerido]],
       [this.inputsForm["calle"], [Validadores.requerido]],
       [this.inputsForm["referencia"], [Validadores.requerido]],
-    ];
+    ]);
 
     // Almacena el estado seleccionado para tener a la mano sus municipios
     this.estadoSeleccionado = null;
@@ -63,7 +64,7 @@ export default class Registro {
       e.preventDefault();
 
       // si el form es valido
-      if (this.validarInputs(this.modeloForm)) {
+      if (this.modeloForm.validarInputs()) {
         // obtener sus datos
         const datos = Object.fromEntries(new FormData(e.target));
 
@@ -141,48 +142,5 @@ export default class Registro {
     opcion.textContent = contenido;
     opcion.value = valor;
     select.appendChild(opcion);
-  }
-
-  // recorre un array de arrays, donde cada array contiene una ref a un input
-  // y un array de validadores
-  validarInputs(modeloForm) {
-    // por defecto el form es valido hasta que se demuestre lo contrario
-    let formValido = true;
-
-    for (let i = 0; i < modeloForm.length; i++) {
-      const modeloInput = modeloForm[i];
-
-      // recorres los validadores
-      for (let j = 0; j < modeloInput[1].length; j++) {
-        const validador = modeloInput[1][j];
-
-        // si no es valido, muestra el error y pasa a recorrer los validadores del sig input
-        if (!validador(modeloInput[0].value)) {
-          this.mostrarError(modeloInput[0]);
-
-          // el form ya no es valido
-          formValido = false;
-          break;
-        }
-
-        // si el input cumple con todos sus validadores, borra sus errores
-        this.borrarError(modeloInput[0]);
-      }
-    }
-    return formValido;
-  }
-
-  // Coloca el msj de error en el elemento especificado
-  // y le agg las clases de error activo
-  mostrarError(input) {
-    const contenedor = input.nextElementSibling;
-    contenedor.className = "error active";
-  }
-
-  // Borra el msj de error en el elemento especificado
-  // y le quita la clase active
-  borrarError(input) {
-    const contenedor = input.nextElementSibling;
-    contenedor.className = "error";
   }
 }
