@@ -1,6 +1,7 @@
 import Validadores from "./validadores.js";
 import Autenticacion from "./autenticacion.js";
 import ModeloForm from "./forms.js";
+import ToastService from "./toasts.js";
 
 export default class Login {
   constructor() {
@@ -10,7 +11,7 @@ export default class Login {
 
     this.modeloForm = new ModeloForm([
       [this.correo, [Validadores.requerido, Validadores.email]],
-      [this.clave, [Validadores.requerido, Validadores.clave]],
+      [this.clave, [Validadores.requerido]],
     ]);
 
     this.login.addEventListener("submit", (e) => {
@@ -32,6 +33,6 @@ export default class Login {
       return;
     }
 
-    alert("Datos de acceso incorrectos!");
+    ToastService.crearToast("Datos de acceso incorrectos");
   }
 }

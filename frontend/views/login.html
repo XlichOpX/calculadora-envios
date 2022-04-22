@@ -1,4 +1,6 @@
 <div class="frame sm-shadow border">
+  <h1 class="text-center">Iniciar sesión</h1>
+  <hr />
   <form id="login" class="grid-x grid-margin-x" novalidate>
     <div class="cell">
       <label for="correo">Correo electrónico</label>
@@ -15,6 +17,15 @@
       <input type="password" id="clave" name="clave" />
       <span class="error">Introduzca su contraseña.</span>
     </div>
-    <button type="submit" class="cell button">Iniciar sesión</button>
+    <button type="submit" class="cell button">Entrar</button>
   </form>
+  <hr />
+  <div class="grid-x grid-margin-x text-center">
+    <div class="cell">
+      <a href="/recuperar-clave">¿Olvidaste tu contraseña?</a>
+    </div>
+    <div class="cell">
+      <a href="/registro">Crear cuenta</a>
+    </div>
+  </div>
 </div>
