@@ -33,6 +33,6 @@ export default class Login {
       return;
     }
 
-    ToastService.crearToast("Datos de acceso incorrectos");
+    ToastService.crearToast("Datos de acceso incorrectos", { class: "fail" });
   }
 }

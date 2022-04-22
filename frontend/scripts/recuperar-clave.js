@@ -50,7 +50,7 @@ export default class RecuperarClave {
         // mostrar el form de preguntas
         this.formPreguntas.style = "";
       } else {
-        ToastService.crearToast("Correo no encontrado");
+        ToastService.crearToast("Correo no encontrado", { class: "fail" });
       }
     });
 

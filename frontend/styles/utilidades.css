@@ -24,11 +24,23 @@
   bottom: 20px;
   right: 20px;
   padding: 10px;
+  background-color: var(--bg-lighter);
+  border: 1px solid var(--light-border);
+  color: var(--text-dark);
+  box-shadow: var(--sm-shadow);
+  z-index: 999;
+}
+
+.toast.success {
   background-color: var(--bg-success);
   border: 1px solid var(--text-success);
   color: var(--text-success);
-  box-shadow: var(--sm-shadow);
-  z-index: 999;
+}
+
+.toast.fail {
+  background-color: var(--bg-error);
+  border: 1px solid var(--text-error);
+  color: var(--text-error);
 }
 
 .oculto {

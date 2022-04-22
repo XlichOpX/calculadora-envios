@@ -75,12 +75,12 @@ export default class Registro {
         // si es exitosa redirige al login
         if (exito.status === 201) {
           this.form.reset();
-          ToastService.crearToast("¡Registro exitoso!");
+          ToastService.crearToast("¡Registro exitoso!", { class: "success" });
           window.location.href = "/login";
           return;
         }
 
-        ToastService.crearToast(exito.error);
+        ToastService.crearToast(exito.error, { class: "fail" });
       }
     });
   }
