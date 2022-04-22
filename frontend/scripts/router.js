@@ -4,6 +4,7 @@ import Registro from "./registro.js";
 import Autenticacion from "./autenticacion.js";
 import Logout from "./logout.js";
 import Navbar from "./navbar.js";
+import RecuperarClave from "./recuperar-clave.js";
 
 // agg listeners a los links de la nav
 document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
@@ -52,6 +53,11 @@ const rutas = {
     path: "/views/registro.html",
     nombre: "Registro",
     disparador: Registro,
+  },
+  "/recuperar-clave": {
+    path: "/views/recuperar-clave.html",
+    nombre: "Recuperar clave",
+    disparador: RecuperarClave,
   },
 };
 

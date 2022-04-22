@@ -1,0 +1,38 @@
+<div class="frame sm-shadow border">
+  <h1 class="text-center">Recuperación de clave</h1>
+  <hr />
+  <form id="form-correo" class="grid-x grid-margin-x" novalidate>
+    <div class="cell">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="usuario" />
+      <span class="error">Por favor introduce un correo válido.</span>
+    </div>
+    <button class="cell button">Recuperar clave</button>
+    <hr />
+  </form>
+
+  <form id="preguntas" class="grid-x grid-margin-x" style="display: none">
+    <legend class="cell">Preguntas de seguridad</legend>
+    <div class="cell medium-4">
+      <label id="pregunta1"></label>
+      <input id="respuesta1" name="respuesta1" type="text" />
+      <span class="error">Requerido.</span>
+    </div>
+    <div class="cell medium-4">
+      <label id="pregunta2"></label>
+      <input id="respuesta2" name="respuesta2" type="text" />
+      <span class="error">Requerido.</span>
+    </div>
+    <div class="cell medium-4">
+      <label id="pregunta3"></label>
+      <input id="respuesta3" name="respuesta3" type="text" />
+      <span class="error">Requerido.</span>
+    </div>
+    <legend class="cell">Nueva contraseña</legend>
+    <div class="cell">
+      <input id="nueva-clave" name="nueva-clave" type="text" />
+      <span class="error">Requerido.</span>
+    </div>
+    <button class="cell button">Verificar</button>
+  </form>
+</div>
