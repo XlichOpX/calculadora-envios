@@ -3,9 +3,9 @@ export default class ToastService {
     const toast = document.createElement("div");
     toast.textContent = msj;
     toast.className = "toast";
-    document.firstElementChild.appendChild(toast);
+    document.body.appendChild(toast);
     setTimeout(() => {
-      document.firstElementChild.removeChild(toast);
+      document.body.removeChild(toast);
     }, 5000);
   }
 }
