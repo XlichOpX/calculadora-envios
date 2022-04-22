@@ -23,6 +23,10 @@ export default class RecuperarClave {
       [this.inputsPreguntas["respuesta1"], [Validadores.requerido]],
       [this.inputsPreguntas["respuesta2"], [Validadores.requerido]],
       [this.inputsPreguntas["respuesta3"], [Validadores.requerido]],
+      [
+        this.inputsPreguntas["nueva-clave"],
+        [Validadores.requerido, Validadores.clave],
+      ],
     ]);
 
     // al hacer submit al form del correo
@@ -37,7 +41,7 @@ export default class RecuperarClave {
         correo: this.correo.value,
       });
 
-      if (preguntas.length > 0) {
+      if (!preguntas.error) {
         // esconder el form de correo
         this.formCorreo.style = "display: none";
 
@@ -50,18 +54,18 @@ export default class RecuperarClave {
         // mostrar el form de preguntas
         this.formPreguntas.style = "";
       } else {
-        ToastService.crearToast("Correo no encontrado", { class: "fail" });
+        ToastService.crearToast(preguntas.error, { class: "fail" });
       }
     });
 
     // al hacer submit al form de preguntas
-    this.formPreguntas.addEventListener("submit", (e) => {
+    this.formPreguntas.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       if (!this.validadorPreguntas.validarInputs()) return;
 
       const conexion = new Conexion();
-      const resCorrectas = conexion.peticion("/recuperacion", "POST", {
+      const resCorrectas = await conexion.peticion("/recuperacion", "POST", {
         verificacion: "",
         correo: this.correo.value,
         respuesta1: this.inputsPreguntas["respuesta1"].value,
@@ -70,10 +74,17 @@ export default class RecuperarClave {
         "nueva-clave": this.inputsPreguntas["nueva-clave"].value,
       });
 
-      if (resCorrectas) {
-        console.log("respuestas correctas");
+      if (!resCorrectas.error) {
+        ToastService.crearToast("Contraseña cambiada exitosamente", {
+          class: "success",
+        });
+        window.location.href = "/login";
+        return;
       } else {
-        console.log("respuestas incorrectas");
+        e.target.reset();
+        ToastService.crearToast(resCorrectas.error, {
+          class: "fail",
+        });
       }
     });
   }
