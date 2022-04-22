@@ -15,7 +15,7 @@ class Autenticacion extends Conexion
     {
         // verifica que los datos esten completos
         if (!isset($datos["usuario"]) || !isset($datos["clave"])) {
-            $respuesta = new Respuesta;
+            $respuesta = new Respuesta();
             return $respuesta->status400("Datos incompletos");
         }
 
@@ -30,7 +30,11 @@ class Autenticacion extends Conexion
         if ($datosUsuario && password_verify($clave, $datosUsuario["clave"])) {
             $jwt = $this->generarJWT(
                 ["alg" => "HS256", "typ" => "JWT"],
-                ["sub" => $datosUsuario['id'], "name" => $datosUsuario['nombre'], "exp" => time() + 60 * 60 * 24]
+                [
+                    "sub" => $datosUsuario["id"],
+                    "name" => $datosUsuario["nombre"],
+                    "exp" => time() + 60 * 60 * 24,
+                ]
             );
             return $jwt;
         }
@@ -41,8 +45,15 @@ class Autenticacion extends Conexion
     // campos: id, clave
     private function obtenerDatosUsuario($usuario)
     {
-        $query = "SELECT id, nombre, clave  FROM usuarios WHERE correo_electronico = :usuario";
-        $datos = $this->query($query, [["nombre" => "usuario", "valor" => $usuario, "tipo" => PDO::PARAM_STR]]);
+        $query =
+            "SELECT id, nombre, clave  FROM usuarios WHERE correo_electronico = :usuario";
+        $datos = $this->query($query, [
+            [
+                "nombre" => "usuario",
+                "valor" => $usuario,
+                "tipo" => PDO::PARAM_STR,
+            ],
+        ]);
 
         // si existe el usuario, devuelve sus datos, si no, devuelve false
         if (isset($datos[0]["id"])) {
@@ -60,7 +71,12 @@ class Autenticacion extends Conexion
         $data_codificada = base64url_encode(json_encode($data));
 
         // genera la firma
-        $firma = hash_hmac("sha256", "$cabecera_codificada.$data_codificada", $this->clave_secreta, true);
+        $firma = hash_hmac(
+            "sha256",
+            "$cabecera_codificada.$data_codificada",
+            $this->clave_secreta,
+            true
+        );
         $firma_codificada = base64url_encode($firma);
 
         $jwt = "$cabecera_codificada.$data_codificada.$firma_codificada";
@@ -71,19 +87,24 @@ class Autenticacion extends Conexion
     function validarJWT($jwt)
     {
         // divide el contenido del token
-        $partes_token = explode('.', $jwt);
+        $partes_token = explode(".", $jwt);
         $cabecera = base64url_decode($partes_token[0]);
         $data = base64url_decode($partes_token[1]);
         $firma_provista = $partes_token[2];
 
         // revisa la fecha de vencimiento del token
         $vencimiento = json_decode($data)->exp;
-        $token_vencido = ($vencimiento - time()) < 0;
+        $token_vencido = $vencimiento - time() < 0;
 
         // generar firma en base a la cabecera y data del token con la clave secreta
         $cabecera_codificada = base64url_encode($cabecera);
         $data_codificada = base64url_encode($data);
-        $firma = hash_hmac("sha256", "$cabecera_codificada.$data_codificada", $this->clave_secreta, true);
+        $firma = hash_hmac(
+            "sha256",
+            "$cabecera_codificada.$data_codificada",
+            $this->clave_secreta,
+            true
+        );
         $firma_codificada = base64url_encode($firma);
 
         // verificar que la firma generada y la firma provista en el token son iguales

@@ -7,7 +7,9 @@ class Usuarios extends Conexion
     function obtenerUsuario($id)
     {
         $query = "SELECT * FROM usuarios WHERE id = :id";
-        return $this->query($query, [["nombre" => "id", "valor" => $id, "tipo" => PDO::PARAM_INT]]);
+        return $this->query($query, [
+            ["nombre" => "id", "valor" => $id, "tipo" => PDO::PARAM_INT],
+        ]);
     }
 
     function obtenerUsuarios()
@@ -74,7 +76,20 @@ class Usuarios extends Conexion
         }
 
         // verifica que el email no exista ya en la db
-        if (count($this->query("SELECT id FROM usuarios WHERE correo_electronico = :correo", [["nombre" => "correo", "valor" => $datos["correo_electronico"], "tipo" => PDO::PARAM_STR]])) > 0) {
+        if (
+            count(
+                $this->query(
+                    "SELECT id FROM usuarios WHERE correo_electronico = :correo",
+                    [
+                        [
+                            "nombre" => "correo",
+                            "valor" => $datos["correo_electronico"],
+                            "tipo" => PDO::PARAM_STR,
+                        ],
+                    ]
+                )
+            ) > 0
+        ) {
             http_response_code(400);
             return ["error" => "El correo indicado ya está registrado"];
         }
@@ -84,11 +99,16 @@ class Usuarios extends Conexion
 
         // crear array de params para la query
         foreach ($requeridos_usuario as $nombre => $tipo) {
-            $params[] = ["nombre" => $nombre, "valor" => $datos[$nombre], "tipo" => $tipo];
+            $params[] = [
+                "nombre" => $nombre,
+                "valor" => $datos[$nombre],
+                "tipo" => $tipo,
+            ];
         }
 
         // query para insertar usuario
-        $query = "INSERT INTO usuarios(correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento, telefono) VALUES (:correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento, :telefono)";
+        $query =
+            "INSERT INTO usuarios(correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento, telefono) VALUES (:correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento, :telefono)";
 
         // comenzar transaccion
         $this->conexion->beginTransaction();
@@ -97,29 +117,53 @@ class Usuarios extends Conexion
         // vaciar params
         $params = [];
         // agg el usuario a los params
-        $params[] = ["nombre" => "id_usuario", "valor" => $id_usuario, "tipo" => PDO::PARAM_INT];
+        $params[] = [
+            "nombre" => "id_usuario",
+            "valor" => $id_usuario,
+            "tipo" => PDO::PARAM_INT,
+        ];
         // crear array de params para el insert de direccion
         foreach ($requeridos_direccion as $nombre => $tipo) {
-            $params[] = ["nombre" => $nombre, "valor" => $datos[$nombre], "tipo" => $tipo];
+            $params[] = [
+                "nombre" => $nombre,
+                "valor" => $datos[$nombre],
+                "tipo" => $tipo,
+            ];
         }
 
         // query para insertar direccion
-        $query = "INSERT INTO direcciones(id_usuario, id_pais , id_estado, id_municipio, id_parroquia, calle, referencia) VALUES (:id_usuario, :id_pais , :id_estado, :id_municipio, :id_parroquia, :calle, :referencia)";
+        $query =
+            "INSERT INTO direcciones(id_usuario, id_pais , id_estado, id_municipio, id_parroquia, calle, referencia) VALUES (:id_usuario, :id_pais , :id_estado, :id_municipio, :id_parroquia, :calle, :referencia)";
 
         // insertar direccion
         $this->insert($query, $params);
 
         // query para insertar preguntas
-        $query = "INSERT INTO preguntas_seguridad(id_usuario, pregunta, respuesta) VALUES (:id_usuario, :pregunta, :respuesta)";
-
+        $query =
+            "INSERT INTO preguntas_seguridad(id_usuario, pregunta, respuesta) VALUES (:id_usuario, :pregunta, :respuesta)";
 
         // insertar las preguntas
         for ($i = 1; $i <= 3; $i++) {
             // vaciar params
             $params = [];
-            $params[] = ["nombre" => "id_usuario", "valor" => $id_usuario, "tipo" => PDO::PARAM_INT];
-            $params[] = ["nombre" => "pregunta", "valor" => $datos["pregunta" . $i], "tipo" => PDO::PARAM_STR];
-            $params[] = ["nombre" => "respuesta", "valor" => password_hash($datos["respuesta" . $i], PASSWORD_DEFAULT), "tipo" => PDO::PARAM_STR];
+            $params[] = [
+                "nombre" => "id_usuario",
+                "valor" => $id_usuario,
+                "tipo" => PDO::PARAM_INT,
+            ];
+            $params[] = [
+                "nombre" => "pregunta",
+                "valor" => $datos["pregunta" . $i],
+                "tipo" => PDO::PARAM_STR,
+            ];
+            $params[] = [
+                "nombre" => "respuesta",
+                "valor" => password_hash(
+                    $datos["respuesta" . $i],
+                    PASSWORD_DEFAULT
+                ),
+                "tipo" => PDO::PARAM_STR,
+            ];
             // insertar pregunta
             $this->insert($query, $params);
         }

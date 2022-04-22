@@ -4,7 +4,7 @@ class Respuesta
 {
     private $respuesta = [
         "status" => "",
-        "resultado" => []
+        "resultado" => [],
     ];
 
     function status200()
@@ -12,7 +12,7 @@ class Respuesta
         $this->respuesta["status"] = "200 OK";
         $this->respuesta["resultado"] = [
             "codigo" => "200",
-            "msj" => "OK"
+            "msj" => "OK",
         ];
         return $this->respuesta;
     }
@@ -22,7 +22,7 @@ class Respuesta
         $this->respuesta["status"] = "201 Created";
         $this->respuesta["resultado"] = [
             "codigo" => "201",
-            "msj" => "Created"
+            "msj" => "Created",
         ];
         return $this->respuesta;
     }
@@ -32,7 +32,7 @@ class Respuesta
         $this->respuesta["status"] = "400 Bad Request";
         $this->respuesta["resultado"] = [
             "codigo" => "400",
-            "msj" => $msj
+            "msj" => $msj,
         ];
         return $this->respuesta;
     }
@@ -42,7 +42,7 @@ class Respuesta
         $this->respuesta["status"] = "401 Unauthorized";
         $this->respuesta["resultado"] = [
             "codigo" => "401",
-            "msj" => "Unauthorized"
+            "msj" => "Unauthorized",
         ];
         return $this->respuesta;
     }
@@ -52,7 +52,7 @@ class Respuesta
         $this->respuesta["status"] = "403 Forbbiden";
         $this->respuesta["resultado"] = [
             "codigo" => "403",
-            "msj" => "Forbbiden"
+            "msj" => "Forbbiden",
         ];
         return $this->respuesta;
     }
@@ -62,7 +62,7 @@ class Respuesta
         $this->respuesta["status"] = "404 Not Found";
         $this->respuesta["resultado"] = [
             "codigo" => "404",
-            "msj" => "Not Found"
+            "msj" => "Not Found",
         ];
         return $this->respuesta;
     }

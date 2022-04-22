@@ -9,10 +9,17 @@ class Recuperacion extends Conexion
             return json_encode(["error" => "Datos incompletos"]);
         }
 
-        $correo = &$datos['correo'];
+        $correo = &$datos["correo"];
 
-        $query = "SELECT id, pregunta FROM preguntas_seguridad WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)";
-        $resultado = $this->query($query, [["nombre" => "correo", "valor" => $correo, "tipo" => PDO::PARAM_STR]]);
+        $query =
+            "SELECT id, pregunta FROM preguntas_seguridad WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)";
+        $resultado = $this->query($query, [
+            [
+                "nombre" => "correo",
+                "valor" => $correo,
+                "tipo" => PDO::PARAM_STR,
+            ],
+        ]);
 
         return json_encode($resultado);
     }
@@ -24,7 +31,7 @@ class Recuperacion extends Conexion
             "respuesta1",
             "respuesta2",
             "respuesta3",
-            "nueva-clave"
+            "nueva-clave",
         ];
 
         foreach ($requerido as $campo) {
@@ -36,16 +43,33 @@ class Recuperacion extends Conexion
         $respuestasCorrectas = $this->obtRespuestas($datos["correo"]);
 
         for ($i = 1; $i <= 3; $i++) {
-            if (!password_verify($datos["respuesta$i"], $respuestasCorrectas[$i - 1]["respuesta"])) {
+            if (
+                !password_verify(
+                    $datos["respuesta$i"],
+                    $respuestasCorrectas[$i - 1]["respuesta"]
+                )
+            ) {
                 return json_encode(["error" => "Respuestas incorrectas"]);
             }
         }
 
-        $query = "UPDATE usuarios SET clave = :clave WHERE correo_electronico = :correo";
+        $query =
+            "UPDATE usuarios SET clave = :clave WHERE correo_electronico = :correo";
 
         $this->insert($query, [
-            ["nombre" => "clave", "valor" => password_hash($datos["nueva-clave"], PASSWORD_DEFAULT), "tipo" => PDO::PARAM_STR],
-            ["nombre" => "correo", "valor" => $datos["correo"], "tipo" => PDO::PARAM_STR]
+            [
+                "nombre" => "clave",
+                "valor" => password_hash(
+                    $datos["nueva-clave"],
+                    PASSWORD_DEFAULT
+                ),
+                "tipo" => PDO::PARAM_STR,
+            ],
+            [
+                "nombre" => "correo",
+                "valor" => $datos["correo"],
+                "tipo" => PDO::PARAM_STR,
+            ],
         ]);
 
         return json_encode([true, $datos]);
@@ -53,8 +77,15 @@ class Recuperacion extends Conexion
 
     function obtRespuestas($correo)
     {
-        $query = "SELECT respuesta FROM preguntas_seguridad WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)";
-        $resultado = $this->query($query, [["nombre" => "correo", "valor" => $correo, "tipo" => PDO::PARAM_STR]]);
+        $query =
+            "SELECT respuesta FROM preguntas_seguridad WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)";
+        $resultado = $this->query($query, [
+            [
+                "nombre" => "correo",
+                "valor" => $correo,
+                "tipo" => PDO::PARAM_STR,
+            ],
+        ]);
 
         return $resultado;
     }
