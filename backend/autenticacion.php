@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $respuestaJwt,
             time() + 60 * 60 * 24,
             "/",
-            ".calc-envios.localhost"
+            ".calc-envios.localhost",
         );
         echo json_encode(true);
         exit();

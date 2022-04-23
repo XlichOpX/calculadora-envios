@@ -34,7 +34,7 @@ class Autenticacion extends Conexion
                     "sub" => $datosUsuario["id"],
                     "name" => $datosUsuario["nombre"],
                     "exp" => time() + 60 * 60 * 24,
-                ]
+                ],
             );
             return $jwt;
         }
@@ -75,7 +75,7 @@ class Autenticacion extends Conexion
             "sha256",
             "$cabecera_codificada.$data_codificada",
             $this->clave_secreta,
-            true
+            true,
         );
         $firma_codificada = base64url_encode($firma);
 
@@ -103,7 +103,7 @@ class Autenticacion extends Conexion
             "sha256",
             "$cabecera_codificada.$data_codificada",
             $this->clave_secreta,
-            true
+            true,
         );
         $firma_codificada = base64url_encode($firma);
 

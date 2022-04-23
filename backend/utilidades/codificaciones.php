@@ -11,7 +11,7 @@ function base64url_decode($string)
             strtr($string, "-_", "+/"),
             strlen($string) % 4,
             "=",
-            STR_PAD_RIGHT
-        )
+            STR_PAD_RIGHT,
+        ),
     );
 }

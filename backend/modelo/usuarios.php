@@ -86,8 +86,8 @@ class Usuarios extends Conexion
                             "valor" => $datos["correo_electronico"],
                             "tipo" => PDO::PARAM_STR,
                         ],
-                    ]
-                )
+                    ],
+                ),
             ) > 0
         ) {
             http_response_code(400);
@@ -160,7 +160,7 @@ class Usuarios extends Conexion
                 "nombre" => "respuesta",
                 "valor" => password_hash(
                     $datos["respuesta" . $i],
-                    PASSWORD_DEFAULT
+                    PASSWORD_DEFAULT,
                 ),
                 "tipo" => PDO::PARAM_STR,
             ];
