@@ -45,8 +45,9 @@ class Autenticacion extends Conexion
     // campos: id, clave
     private function obtenerDatosUsuario($usuario)
     {
-        $query =
-            "SELECT id, nombre, clave  FROM usuarios WHERE correo_electronico = :usuario";
+        $query = <<<SQL
+        SELECT id, nombre, clave  FROM usuarios WHERE correo_electronico = :usuario
+        SQL;
         $datos = $this->query($query, [
             [
                 "nombre" => "usuario",

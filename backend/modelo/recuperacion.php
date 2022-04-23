@@ -16,8 +16,10 @@ class Recuperacion extends Conexion
         $correo = &$datos["correo"];
 
         // query que obtiene las preguntas
-        $query =
-            "SELECT id, pregunta FROM preguntas_seguridad WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)";
+        $query = <<<SQL
+        SELECT id, pregunta FROM preguntas_seguridad
+        WHERE id_usuario = (SELECT id FROM usuarios WHERE correo_electronico = :correo)
+        SQL;
 
         // realizar la query y almacenar el resultado
         $resultado = $this->query($query, [

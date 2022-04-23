@@ -107,8 +107,10 @@ class Usuarios extends Conexion
         }
 
         // query para insertar usuario
-        $query =
-            "INSERT INTO usuarios(correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento, telefono) VALUES (:correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento, :telefono)";
+        $query = <<<SQL
+        INSERT INTO usuarios(correo_electronico, clave ,nombre, apellido, cedula, fecha_nacimiento, telefono)
+        VALUES (:correo_electronico, :clave, :nombre, :apellido, :cedula, :fecha_nacimiento, :telefono)
+        SQL;
 
         // comenzar transaccion
         $this->conexion->beginTransaction();
@@ -132,15 +134,19 @@ class Usuarios extends Conexion
         }
 
         // query para insertar direccion
-        $query =
-            "INSERT INTO direcciones(id_usuario, id_pais , id_estado, id_municipio, id_parroquia, calle, referencia) VALUES (:id_usuario, :id_pais , :id_estado, :id_municipio, :id_parroquia, :calle, :referencia)";
+        $query = <<<SQL
+        INSERT INTO direcciones(id_usuario, id_pais , id_estado, id_municipio, id_parroquia, calle, referencia)
+        VALUES (:id_usuario, :id_pais , :id_estado, :id_municipio, :id_parroquia, :calle, :referencia)
+        SQL;
 
         // insertar direccion
         $this->insert($query, $params);
 
         // query para insertar preguntas
-        $query =
-            "INSERT INTO preguntas_seguridad(id_usuario, pregunta, respuesta) VALUES (:id_usuario, :pregunta, :respuesta)";
+        $query = <<<SQL
+        INSERT INTO preguntas_seguridad(id_usuario, pregunta, respuesta)
+        VALUES (:id_usuario, :pregunta, :respuesta)
+        SQL;
 
         // insertar las preguntas
         for ($i = 1; $i <= 3; $i++) {
