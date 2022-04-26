@@ -1,10 +1,10 @@
-import Calculadora from "./calculadora.js";
-import Login from "./login.js";
-import Registro from "./registro.js";
+import Calculadora from "/views/calculadora/calculadora.js";
+import Login from "/views/login/login.js";
+import Registro from "/views/registro/registro.js";
 import Autenticacion from "./autenticacion.js";
-import Logout from "./logout.js";
+import Logout from "/views/logout/logout.js";
 import Navbar from "./navbar.js";
-import RecuperarClave from "./recuperar-clave.js";
+import RecuperarClave from "/views/recuperar-clave/recuperar-clave.js";
 
 // agg listeners a los links de la nav
 document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
@@ -34,28 +34,28 @@ const rutas = {
     redirigir: "/calculadora",
   },
   "/calculadora": {
-    path: "/views/calculadora.html",
+    path: "/views/calculadora/calculadora.html",
     nombre: "Calculadora",
     disparador: Calculadora,
     bloqueada: true,
   },
   "/login": {
-    path: "/views/login.html",
+    path: "/views/login/login.html",
     nombre: "Iniciar sesión",
     disparador: Login,
   },
   "/logout": {
-    path: "/views/logout.html",
+    path: "/views/logout/logout.html",
     nombre: "Cerrando sesión",
     disparador: Logout,
   },
   "/registro": {
-    path: "/views/registro.html",
+    path: "/views/registro/registro.html",
     nombre: "Registro",
     disparador: Registro,
   },
   "/recuperar-clave": {
-    path: "/views/recuperar-clave.html",
+    path: "/views/recuperar-clave/recuperar-clave.html",
     nombre: "Recuperar clave",
     disparador: RecuperarClave,
   },

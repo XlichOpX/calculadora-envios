@@ -1,7 +1,7 @@
-import Validadores from "./validadores.js";
-import Autenticacion from "./autenticacion.js";
-import ModeloForm from "./forms.js";
-import ToastService from "./toasts.js";
+import Validadores from "/scripts/validadores.js";
+import Autenticacion from "/scripts/autenticacion.js";
+import ModeloForm from "/scripts/forms.js";
+import ToastService from "/scripts/toasts.js";
 
 export default class Login {
   constructor() {
