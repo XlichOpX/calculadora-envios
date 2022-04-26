@@ -8,16 +8,4 @@ export default class Utilidades {
       elemento.removeChild(elemento.firstChild);
     }
   }
-
-  static cambiarVista = async function (urlVista) {
-    await fetch(urlVista)
-      .then((res) => res.text())
-      .then((res) => {
-        const vista = document.getElementById("vista");
-        Utilidades.eliminarNodosHijos(vista);
-        const nuevaVista = document.createElement("div");
-        nuevaVista.innerHTML = res;
-        vista.appendChild(nuevaVista.firstChild);
-      });
-  };
 }
