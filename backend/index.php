@@ -13,3 +13,7 @@ if ($params["url"] === "usuarios") {
 if ($params["url"] === "recuperacion") {
     require_once "./controlador/recuperacion.php";
 }
+
+if ($params["url"] === "estados") {
+    require_once "./controlador/estados.php";
+}
