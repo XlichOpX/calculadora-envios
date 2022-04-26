@@ -1,7 +1,7 @@
-import Conexion from "/scripts/conexion.js";
-import ModeloForm from "/scripts/forms.js";
-import ToastService from "/scripts/toasts.js";
-import Validadores from "/scripts/validadores.js";
+import Conexion from "/scripts/api/conexion.js";
+import ModeloForm from "/scripts/utilidades/forms.js";
+import ToastService from "/scripts/utilidades/toasts.js";
+import Validadores from "/scripts/utilidades/validadores.js";
 
 export default class RecuperarClave {
   constructor() {

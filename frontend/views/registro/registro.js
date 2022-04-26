@@ -1,9 +1,9 @@
 import estados from "/assets/venezuela.js";
-import ToastService from "/scripts/toasts.js";
-import Utilidades from "/scripts/utilidades.js";
-import Validadores from "/scripts/validadores.js";
-import Conexion from "/scripts/conexion.js";
-import ModeloForm from "/scripts/forms.js";
+import ToastService from "/scripts/utilidades/toasts.js";
+import Utilidades from "/scripts/utilidades/utilidades.js";
+import Validadores from "/scripts/utilidades/validadores.js";
+import Conexion from "/scripts/api/conexion.js";
+import ModeloForm from "/scripts/utilidades/forms.js";
 
 export default class Registro {
   constructor() {

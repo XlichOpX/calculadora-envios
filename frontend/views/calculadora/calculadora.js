@@ -1,8 +1,8 @@
-import Ubicacion from "../../scripts/ubicacion.js";
-import Utilidades from "../../scripts/utilidades.js";
-import Transporte from "../../scripts/transporte.js";
-import Envio from "../../scripts/envio.js";
-import Paquete from "../../scripts/paquete.js";
+import Ubicacion from "/scripts/envios/ubicacion.js";
+import Utilidades from "/scripts/utilidades/utilidades.js";
+import Transporte from "/scripts/envios/transporte.js";
+import Envio from "/scripts/envios/envio.js";
+import Paquete from "/scripts/envios/paquete.js";
 
 export default class CalculadoraCostosEnvios {
   constructor() {
