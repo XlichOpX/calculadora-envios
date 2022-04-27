@@ -1,10 +1,9 @@
 <?php
 
-require_once "./modelo/conexion.php";
-require_once "./utilidades/respuesta.php";
-require_once "./utilidades/codificaciones.php";
+require "./modelo/Conexion.php";
+require "./utilidades/codificaciones.php";
 
-class Autenticacion extends Conexion
+class ModeloAutenticacion extends Conexion
 {
     private $clave_secreta = "ej6BMi3XpbY3bT85wOKjWq3Dzi9ewV6P";
 

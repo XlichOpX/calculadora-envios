@@ -1,7 +1,7 @@
 <?php
-require_once "./modelo/conexion.php";
+require "./modelo/Conexion.php";
 
-class Recuperacion extends Conexion
+class ModeloRecuperacion extends Conexion
 {
     // devuelve las preguntas de un usuario
     function obtPreguntas($datos)

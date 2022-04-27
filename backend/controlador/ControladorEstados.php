@@ -1,11 +1,11 @@
 <?php
 
-require "./modelo/estados.php";
+require "./modelo/ModeloEstados.php";
 
-$estados = new Estados();
+$modelo_estados = new ModeloEstados();
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $resultado = $estados->obtEstados();
+    $resultado = $modelo_estados->obtEstados();
 
     if (count($resultado) > 0) {
         http_response_code(200);

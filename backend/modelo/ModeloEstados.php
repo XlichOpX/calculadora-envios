@@ -1,8 +1,8 @@
 <?php
 
-require "./modelo/conexion.php";
+require "./modelo/Conexion.php";
 
-class Estados extends Conexion
+class ModeloEstados extends Conexion
 {
     function obtEstados()
     {

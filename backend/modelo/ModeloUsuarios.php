@@ -1,8 +1,8 @@
 <?php
 
-require "./modelo/conexion.php";
+require "./modelo/Conexion.php";
 
-class Usuarios extends Conexion
+class ModeloUsuarios extends Conexion
 {
     function obtenerUsuario($id)
     {
