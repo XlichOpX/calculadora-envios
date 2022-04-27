@@ -52,4 +52,13 @@ export default class Autenticacion {
           .replace("jwt_token=", "")
       : null;
   }
+
+  // parsea el jwt local a json
+  static parseJwt(token) {
+    try {
+      return JSON.parse(atob(token.split(".")[1]));
+    } catch (e) {
+      return null;
+    }
+  }
 }
