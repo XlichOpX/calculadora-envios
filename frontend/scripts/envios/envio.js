@@ -1,13 +1,12 @@
 import Ubicacion from "./ubicacion.js";
 
 export default class Envio {
-  constructor(paquete, origen, destino, transporte, gananciaCondcutor) {
+  constructor(paquete, origen, destino, transporte) {
     this.paquete = paquete;
     this.origen = origen;
     this.destino = destino;
     this.transporte = transporte;
     this.distancia = Ubicacion.calcularDistancia(this.origen, this.destino);
-    this.gananciaConductor = gananciaCondcutor / 100; // Pasar el % a su forma decimal
     this.precio = this.calcularPrecio();
     this.tiempoEstimado = this.calcularTiempoEstimado();
   }
@@ -19,7 +18,7 @@ export default class Envio {
     const precioBase = this.distancia * 0.02;
 
     // + el % de la tarifa
-    let precio = precioBase + precioBase * this.gananciaConductor;
+    let precio = precioBase + precioBase;
 
     // + el % del tipo de transporte
     precio += precioBase * this.transporte.tarifa;
@@ -27,12 +26,12 @@ export default class Envio {
     // + un % del peso del paquete
     // (se toma una décima parte de gananciaConductor para
     // que el costo no sea exageradamente grande)
-    precio += this.paquete.peso * (this.gananciaConductor / 20);
+    precio += this.paquete.peso * 0.01;
 
     // + un % del volumen del paquete
     // (se toma una décima parte de gananciaConductor para
     // que el costo no sea exageradamente grande)
-    precio += this.paquete.volumen * (this.gananciaConductor / 20);
+    precio += this.paquete.volumen * 0.01;
 
     return precio;
   }

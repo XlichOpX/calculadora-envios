@@ -3,29 +3,20 @@ import Utilidades from "/scripts/utilidades/utilidades.js";
 import Transporte from "/scripts/envios/transporte.js";
 import Envio from "/scripts/envios/envio.js";
 import Paquete from "/scripts/envios/paquete.js";
+import Autenticacion from "/scripts/api/autenticacion.js";
 
 export default class CalculadoraCostosEnvios {
   constructor() {
-    this.inputs = document.getElementById("formulario").elements;
-    // Obtener el input peso del paquete
-    const inputPeso = this.inputs["peso"];
+    this.formCalc = document.getElementById("formCalc");
+    this.datosFormCalc = null;
+    this.datosFormAgendar = null;
 
-    // Obtener los inputs  de dimensiones del paquete
-    const inputsDimensiones = [
-      this.inputs["largo"],
-      this.inputs["ancho"],
-      this.inputs["alto"],
-    ];
+    // Obtener los selects del form para calcular
+    const selectOrigen = this.formCalc.elements["select-origen"];
+    const selectDestino = this.formCalc.elements["select-destino"];
+    const selectTransporte = this.formCalc.elements["select-transporte"];
 
-    // Obtener los selects del form
-    const selectOrigen = this.inputs["select-origen"];
-    const selectDestino = this.inputs["select-destino"];
-    const selectTransporte = this.inputs["select-transporte"];
-
-    // Obtener el input de ganancia
-    const inputGanancia = this.inputs["ganancia"];
-
-    // Obtener los recipientes para las salidas
+    // Obtener los contenedores para los resultados
     const recipientePrecio = document.getElementById("precio-calculado");
     const recipienteDistancia = document.getElementById("distancia-recorrida");
     const recipienteTiempoEstimado = document.getElementById("tiempo-estimado");
@@ -51,28 +42,29 @@ export default class CalculadoraCostosEnvios {
       );
     });
 
-    // Obtener el form y escuchar al evento submit
-    const form = document.getElementById("formulario");
-    form.addEventListener("submit", (event) => {
+    formCalc.addEventListener("submit", (e) => {
       // Evitar que se recarge la página
-      event.preventDefault();
+      e.preventDefault();
+
+      // Crear objeto con los datos del form
+      this.datosFormCalc = Object.fromEntries(new FormData(this.formCalc));
 
       // Crear el array de dimensiones para el paquete
-      let dimensiones = [];
-      for (let i = 0; i < inputsDimensiones.length; i++) {
-        dimensiones.push(inputsDimensiones[i].value);
-      }
+      const dimensiones = [
+        this.datosFormCalc["alto"],
+        this.datosFormCalc["ancho"],
+        this.datosFormCalc["largo"],
+      ];
 
       // Crear un paquete
-      let paquete = new Paquete(inputPeso.value, dimensiones);
+      const paquete = new Paquete(this.datosFormCalc["peso"], dimensiones);
 
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
         paquete,
-        Ubicacion.ubicaciones[selectOrigen.value],
-        Ubicacion.ubicaciones[selectDestino.value],
-        Transporte.transportes[selectTransporte.value],
-        inputGanancia.value
+        Ubicacion.ubicaciones[this.datosFormCalc["origen"]],
+        Ubicacion.ubicaciones[this.datosFormCalc["destino"]],
+        Transporte.transportes[this.datosFormCalc["transporte"]]
       );
 
       // Mostrar el precio calculado
@@ -85,6 +77,24 @@ export default class CalculadoraCostosEnvios {
       recipienteTiempoEstimado.textContent = `Tiempo de recorrido estimado: ${envio.tiempoEstimado.toFixed(
         2
       )} horas`;
+
+      // mostrar el div de resultados
+      document.getElementById("resultado").style = "";
+    });
+
+    const formAgendar = document.getElementById("formAgendar");
+    formAgendar.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      this.datosFormAgendar = Object.fromEntries(new FormData(formAgendar));
+
+      const datos = Object.assign(
+        {},
+        this.datosFormCalc,
+        this.datosFormAgendar
+      );
+
+      console.log("Aqui se haria una request al back con estos datos", datos);
     });
   }
 }
