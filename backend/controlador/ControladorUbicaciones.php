@@ -1,6 +1,6 @@
 <?php
 
-require "./modelo/ModeloUbicaciones.php";
+require_once "./modelo/ModeloUbicaciones.php";
 
 $modelo_ubicaciones = new ModeloUbicaciones();
 

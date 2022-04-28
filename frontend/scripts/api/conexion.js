@@ -8,6 +8,7 @@ export default class Conexion {
     const opciones = {
       method: metodo,
       body: datos ? JSON.stringify(datos) : null,
+      credentials: "include",
     };
     const resultado = fetch(peticion, opciones)
       .then((res) => res.json())

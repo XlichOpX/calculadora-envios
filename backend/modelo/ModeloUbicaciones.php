@@ -1,6 +1,6 @@
 <?php
 
-require "./modelo/Conexion.php";
+require_once "./modelo/Conexion.php";
 
 class ModeloUbicaciones extends Conexion
 {

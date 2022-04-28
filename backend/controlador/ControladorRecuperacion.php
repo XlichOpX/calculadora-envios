@@ -1,5 +1,5 @@
 <?php
-require "./modelo/Modelorecuperacion.php";
+require_once "./modelo/Modelorecuperacion.php";
 $modelo_recuperacion = new ModeloRecuperacion();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

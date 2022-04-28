@@ -1,5 +1,5 @@
 <?php
-require "./modelo/ModeloUsuarios.php";
+require_once "./modelo/ModeloUsuarios.php";
 $modelo_usuarios = new ModeloUsuarios();
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {

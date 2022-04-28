@@ -3,7 +3,10 @@
 header("Access-Control-Allow-Origin: http://calc-envios.localhost");
 header("Access-Control-Allow-Credentials: true");
 
-require "./modelo/ModeloAutenticacion.php";
+require_once "./modelo/ModeloAutenticacion.php";
+require_once "./utilidades/JWTUtils.php";
+require_once "./utilidades/Secret.php";
+
 $modelo_autenticacion = new ModeloAutenticacion();
 
 // si la request es post, se procesa
@@ -11,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // si existe una cookie con el token
     if (isset($_COOKIE["jwt_token"])) {
         // verificar la validez del mismo
-        $respuesta = $modelo_autenticacion->validarJWT($_COOKIE["jwt_token"]);
+        $respuesta = validarJWT($_COOKIE["jwt_token"], $clave_secreta);
 
         // si es valido, devuelve true
         if ($respuesta) {
@@ -29,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $body = json_decode(file_get_contents("php://input"), true);
 
     // valida los datos y genera un token
-    $respuestaJwt = $modelo_autenticacion->iniciarSesion($body);
+    $respuestaJwt = $modelo_autenticacion->iniciarSesion($body, $clave_secreta);
 
-    if ($respuestaJwt) {
+    if (!isset($respuestaJwt["error"])) {
         setcookie(
             "jwt_token",
             $respuestaJwt,
@@ -43,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    echo json_encode(false);
+    echo json_encode($respuestaJwt);
     exit();
 }
 

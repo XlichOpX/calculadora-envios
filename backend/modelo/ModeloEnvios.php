@@ -1,6 +1,6 @@
 <?php
 
-require "./modelo/conexion.php";
+require_once "./modelo/conexion.php";
 
 class ModeloEnvios extends Conexion
 {

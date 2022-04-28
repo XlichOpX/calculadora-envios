@@ -7,21 +7,21 @@ header("Access-Control-Allow-Credentials: true");
 parse_str($_SERVER["QUERY_STRING"], $params);
 
 if ($params["url"] === "usuarios") {
-    require "./controlador/ControladorUsuarios.php";
+    require_once "./controlador/ControladorUsuarios.php";
 }
 
 if ($params["url"] === "recuperacion") {
-    require "./controlador/ControladorRecuperacion.php";
+    require_once "./controlador/ControladorRecuperacion.php";
 }
 
 if ($params["url"] === "envios") {
-    require "./controlador/ControladorEnvios.php";
+    require_once "./controlador/ControladorEnvios.php";
 }
 
 if ($params["url"] === "transportes") {
-    require "./controlador/ControladorTransportes.php";
+    require_once "./controlador/ControladorTransportes.php";
 }
 
 if ($params["url"] === "ubicaciones") {
-    require "./controlador/ControladorUbicaciones.php";
+    require_once "./controlador/ControladorUbicaciones.php";
 }

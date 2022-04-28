@@ -1,6 +1,6 @@
 <?php
 
-require "./modelo/ModeloTransportes.php";
+require_once "./modelo/ModeloTransportes.php";
 
 $modelo_transportes = new ModeloTransportes();
 

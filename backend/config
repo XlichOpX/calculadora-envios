@@ -4,5 +4,6 @@
     "user": "root",
     "database": "inu_calc_envios",
     "port": "3306"
-  }
+  },
+  "secret": "ej6BMi3XpbY3bT85wOKjWq3Dzi9ewV6P"
 }
