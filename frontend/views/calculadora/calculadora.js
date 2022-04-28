@@ -1,10 +1,11 @@
-import Ubicacion from "/scripts/envios/ubicacion.js";
 import Utilidades from "/scripts/utilidades/utilidades.js";
-import Transporte from "/scripts/envios/transporte.js";
 import Envio from "/scripts/envios/envio.js";
 import Paquete from "/scripts/envios/paquete.js";
 import ServicioTransportes from "/scripts/api/transportes.js";
 import ServicioUbicaciones from "/scripts/api/ubicaciones.js";
+import Autenticacion from "../../scripts/api/autenticacion.js";
+import ServicioEnvios from "/scripts/api/envios.js";
+import ToastService from "/scripts/utilidades/toasts.js";
 
 export default class CalculadoraCostosEnvios {
   constructor() {
@@ -14,14 +15,14 @@ export default class CalculadoraCostosEnvios {
     const svUbi = new ServicioUbicaciones();
     let ubicaciones;
 
-    this.formCalc = document.getElementById("formCalc");
-    this.datosFormCalc = null;
-    this.datosFormAgendar = null;
+    const formCalc = document.getElementById("formCalc");
+    let datosFormCalc = null;
+    let datosFormAgendar = null;
 
     // Obtener los selects del form para calcular
-    const selectOrigen = this.formCalc.elements["select-origen"];
-    const selectDestino = this.formCalc.elements["select-destino"];
-    const selectTransporte = this.formCalc.elements["select-transporte"];
+    const selectOrigen = formCalc.elements["select-origen"];
+    const selectDestino = formCalc.elements["select-destino"];
+    const selectTransporte = formCalc.elements["select-transporte"];
 
     // Obtener los contenedores para los resultados
     const recipientePrecio = document.getElementById("precio-calculado");
@@ -53,18 +54,19 @@ export default class CalculadoraCostosEnvios {
       e.preventDefault();
 
       // Crear objeto con los datos del form
-      this.datosFormCalc = Object.fromEntries(new FormData(this.formCalc));
+      datosFormCalc = Object.fromEntries(new FormData(formCalc));
 
       // Crear el array de dimensiones para el paquete
       const dimensiones = [
-        this.datosFormCalc["alto"],
-        this.datosFormCalc["ancho"],
-        this.datosFormCalc["largo"],
+        datosFormCalc["alto"],
+        datosFormCalc["ancho"],
+        datosFormCalc["largo"],
       ];
 
       // Crear un paquete
-      const paquete = new Paquete(this.datosFormCalc["peso"], dimensiones);
+      const paquete = new Paquete(datosFormCalc["peso"], dimensiones);
 
+      // obtener los datos de las opciones seleccionadas por el usuario
       const transporteSeleccionado = Utilidades.buscarObjEnArray(
         selectTransporte.value,
         transportes
@@ -107,15 +109,31 @@ export default class CalculadoraCostosEnvios {
     formAgendar.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      this.datosFormAgendar = Object.fromEntries(new FormData(formAgendar));
+      datosFormAgendar = Object.fromEntries(new FormData(formAgendar));
 
       const datos = Object.assign(
-        {},
-        this.datosFormCalc,
-        this.datosFormAgendar
+        { usuario: Autenticacion.parseJwt().sub },
+        datosFormCalc,
+        datosFormAgendar
       );
 
-      console.log("Aqui se haria una request al back con estos datos", datos);
+      const svEnvios = new ServicioEnvios();
+      svEnvios.crearEnvio(datos).then((res) => {
+        if (!res.status !== 400) {
+          document.getElementById("resultado").style = "display: none";
+          formCalc.reset();
+          formAgendar.reset();
+          ToastService.crearToast(
+            "¡Envío agendado! Estamos a la espera de recibir el paquete.",
+            { class: "success" }
+          );
+        } else {
+          ToastService.crearToast(
+            "Lo sentimos, hubo un error al agendar tu envío :(",
+            { class: "fail" }
+          );
+        }
+      });
     });
   }
 }

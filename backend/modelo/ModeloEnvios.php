@@ -13,7 +13,6 @@ class ModeloEnvios extends Conexion
         // campos requeridos para crear un envio
         $requeridos = [
             "usuario" => PDO::PARAM_INT,
-            "estatus" => PDO::PARAM_INT,
             "transporte" => PDO::PARAM_INT,
             "destino" => PDO::PARAM_INT,
             "origen" => PDO::PARAM_INT,
@@ -22,6 +21,7 @@ class ModeloEnvios extends Conexion
             "alto" => PDO::PARAM_STR,
             "largo" => PDO::PARAM_STR,
             "nota_adicional" => PDO::PARAM_STR,
+            "fecha_recepcion" => PDO::PARAM_STR,
         ];
 
         // verificar que todos los datos esten presentes
@@ -97,7 +97,6 @@ class ModeloEnvios extends Conexion
         $query = <<<SQL
         INSERT INTO envios (
                 id_usuario,
-                id_estatus,
                 id_transporte,
                 id_origen,
                 id_destino,
@@ -106,12 +105,12 @@ class ModeloEnvios extends Conexion
                 alto,
                 largo,
                 precio,
+                fecha_recepcion,
                 nota_adicional
             )
 
             VALUES (
                 :usuario,
-                :estatus,
                 :transporte,
                 :origen,
                 :destino,
@@ -120,6 +119,7 @@ class ModeloEnvios extends Conexion
                 :alto,
                 :largo,
                 :precio,
+                :fecha_recepcion,
                 :nota_adicional
             )
         SQL;

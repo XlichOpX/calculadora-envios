@@ -45,8 +45,15 @@ class Conexion
             $stmt->bindParam($param["nombre"], $param["valor"], $param["tipo"]);
         }
 
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->execute()) {
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (count($result) > 0) {
+                return $result;
+            }
+            return false;
+        }
+
+        return false;
     }
 
     // metodo base para realizar inserts
@@ -59,7 +66,10 @@ class Conexion
             $stmt->bindParam($param["nombre"], $param["valor"], $param["tipo"]);
         }
 
-        $stmt->execute();
-        return $this->conexion->lastInsertId();
+        if ($stmt->execute()) {
+            return $this->conexion->lastInsertId();
+        }
+
+        return false;
     }
 }

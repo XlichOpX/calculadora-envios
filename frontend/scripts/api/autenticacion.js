@@ -54,9 +54,9 @@ export default class Autenticacion {
   }
 
   // parsea el jwt local a json
-  static parseJwt(token) {
+  static parseJwt() {
     try {
-      return JSON.parse(atob(token.split(".")[1]));
+      return JSON.parse(atob(Autenticacion.obtenerJwt().split(".")[1]));
     } catch (e) {
       return null;
     }
