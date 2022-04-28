@@ -31,7 +31,7 @@ class ModeloRecuperacion extends Conexion
         ]);
 
         // si se obtienen preguntas las envia
-        if (count($resultado) > 0) {
+        if ($resultado) {
             http_response_code(200);
             return $resultado;
         }
