@@ -14,10 +14,6 @@ if ($params["url"] === "recuperacion") {
     require "./controlador/ControladorRecuperacion.php";
 }
 
-if ($params["url"] === "estados") {
-    require "./controlador/ControladorEstados.php";
-}
-
 if ($params["url"] === "envios") {
     require "./controlador/ControladorEnvios.php";
 }
