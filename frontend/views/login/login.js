@@ -23,12 +23,12 @@ export default class Login {
   }
 
   async validarAcceso() {
-    const valido = await Autenticacion.validarAcceso(
+    const res = await Autenticacion.validarAcceso(
       this.correo.value,
       this.clave.value
     );
 
-    if (valido) {
+    if (!res.hasOwnProperty("error")) {
       window.location.href = "/calculadora";
       return;
     }

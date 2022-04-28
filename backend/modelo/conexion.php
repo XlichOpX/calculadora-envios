@@ -50,7 +50,6 @@ class Conexion
             if (count($result) > 0) {
                 return $result;
             }
-            return false;
         }
 
         return false;

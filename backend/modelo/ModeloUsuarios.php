@@ -77,18 +77,16 @@ class ModeloUsuarios extends Conexion
 
         // verifica que el email no exista ya en la db
         if (
-            count(
-                $this->query(
-                    "SELECT id FROM usuarios WHERE correo_electronico = :correo",
+            $this->query(
+                "SELECT id FROM usuarios WHERE correo_electronico = :correo",
+                [
                     [
-                        [
-                            "nombre" => "correo",
-                            "valor" => $datos["correo_electronico"],
-                            "tipo" => PDO::PARAM_STR,
-                        ],
+                        "nombre" => "correo",
+                        "valor" => $datos["correo_electronico"],
+                        "tipo" => PDO::PARAM_STR,
                     ],
-                ),
-            ) > 0
+                ],
+            )
         ) {
             http_response_code(400);
             return ["error" => "El correo indicado ya está registrado"];
