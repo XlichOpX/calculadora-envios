@@ -121,10 +121,39 @@ class ModeloEnvios extends Conexion
             )
         SQL;
 
-        // ejecutar query con los params
-        $resultado = $this->insert($query, $params);
+        // comenzar una transaccion
+        $this->conexion->beginTransaction();
 
-        // retornar el resultado
-        return $resultado;
+        // ejecutar query con los params
+        $id_envio = $this->insert($query, $params);
+
+        // query para insertar el primer seguimiento del envio
+        $query = <<<SQL
+            INSERT INTO seguimientos (id_envio, id_estatus)
+            VALUES (:id_envio, 1)
+        SQL;
+
+        // params para la query del seguimiento
+        $params = [
+            [
+                "nombre" => "id_envio",
+                "valor" => $id_envio,
+                "tipo" => PDO::PARAM_INT,
+            ],
+        ];
+
+        // insertar seguimiento
+        $id_seguimiento = $this->insert($query, $params);
+
+        // confirmar la transaccion
+        $resultado = $this->conexion->commit();
+
+        // si fue exitosa, devuelve el num de tracking
+        if ($resultado) {
+            return ["num_tracking" => $id_seguimiento];
+        }
+
+        // si no, devuelve false
+        return false;
     }
 }
