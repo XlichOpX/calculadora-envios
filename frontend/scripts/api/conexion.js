@@ -3,10 +3,13 @@ export default class Conexion {
     this.baseUrl = "http://calc-envios.localhost:3000";
   }
 
-  async peticion(endpoint, metodo, datos) {
+  peticion(endpoint, metodo, datos = null) {
     const peticion = new Request(`${this.baseUrl}/${endpoint}`);
-    const opciones = { method: metodo, body: JSON.stringify(datos) };
-    const resultado = await fetch(peticion, opciones)
+    const opciones = {
+      method: metodo,
+      body: datos ? JSON.stringify(datos) : null,
+    };
+    const resultado = fetch(peticion, opciones)
       .then((res) => res.json())
       .then((res) => res);
     return resultado;
@@ -15,7 +18,10 @@ export default class Conexion {
   async crearUsuario(datos) {
     const peticion = new Request(`${this.baseUrl}/usuarios`);
 
-    const opciones = { method: "POST", body: JSON.stringify(datos) };
+    const opciones = {
+      method: "POST",
+      body: JSON.stringify(datos),
+    };
 
     const resultado = await fetch(peticion, opciones)
       .then((res) => res.json())

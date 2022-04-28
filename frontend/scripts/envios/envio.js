@@ -37,7 +37,7 @@ export default class Envio {
   }
 
   calcularTiempoEstimado() {
-    const tiempoEstimado = this.distancia / this.transporte.velocidad;
+    const tiempoEstimado = this.distancia / this.transporte.velocidad_promedio;
     return tiempoEstimado; // en horas
   }
 }

@@ -3,10 +3,14 @@ import Utilidades from "/scripts/utilidades/utilidades.js";
 import Transporte from "/scripts/envios/transporte.js";
 import Envio from "/scripts/envios/envio.js";
 import Paquete from "/scripts/envios/paquete.js";
-import Autenticacion from "/scripts/api/autenticacion.js";
+import ServicioTransportes from "/scripts/api/transportes.js";
 
 export default class CalculadoraCostosEnvios {
   constructor() {
+    const svTrans = new ServicioTransportes();
+
+    let transportes;
+
     this.formCalc = document.getElementById("formCalc");
     this.datosFormCalc = null;
     this.datosFormAgendar = null;
@@ -33,13 +37,14 @@ export default class CalculadoraCostosEnvios {
       );
     });
 
-    Object.values(Transporte.transportes).forEach((transporte) => {
-      const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
-        transporte.nombre
-      );
-      selectTransporte.appendChild(
-        new Option(nombreEnMayuscula, transporte.nombre)
-      );
+    // hacer peticion a la api, cuando se reciban los datos, llena el select
+    svTrans.obtTransportes().then((res) => {
+      transportes = res;
+      Object.values(res).forEach((transporte) => {
+        selectTransporte.appendChild(
+          new Option(transporte.nombre, transporte.id)
+        );
+      });
     });
 
     formCalc.addEventListener("submit", (e) => {
@@ -59,12 +64,19 @@ export default class CalculadoraCostosEnvios {
       // Crear un paquete
       const paquete = new Paquete(this.datosFormCalc["peso"], dimensiones);
 
+      let transporteSeleccionado;
+      transportes.forEach((transporte) => {
+        if (transporte.id === selectTransporte.value) {
+          transporteSeleccionado = transporte;
+        }
+      });
+
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
         paquete,
         Ubicacion.ubicaciones[this.datosFormCalc["origen"]],
         Ubicacion.ubicaciones[this.datosFormCalc["destino"]],
-        Transporte.transportes[this.datosFormCalc["transporte"]]
+        transporteSeleccionado
       );
 
       // Mostrar el precio calculado

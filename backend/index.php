@@ -21,3 +21,7 @@ if ($params["url"] === "estados") {
 if ($params["url"] === "envios") {
     require "./controlador/ControladorEnvios.php";
 }
+
+if ($params["url"] === "transportes") {
+    require "./controlador/ControladorTransportes.php";
+}
