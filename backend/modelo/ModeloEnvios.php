@@ -7,9 +7,6 @@ class ModeloEnvios extends Conexion
     // funcion para crear envios
     public function crearEnvio($datos)
     {
-        // convertir los datos a array map
-        $datos = json_decode($datos, true);
-
         // campos requeridos para crear un envio
         $requeridos = [
             "usuario" => PDO::PARAM_INT,
