@@ -4,12 +4,15 @@ import Transporte from "/scripts/envios/transporte.js";
 import Envio from "/scripts/envios/envio.js";
 import Paquete from "/scripts/envios/paquete.js";
 import ServicioTransportes from "/scripts/api/transportes.js";
+import ServicioUbicaciones from "/scripts/api/ubicaciones.js";
 
 export default class CalculadoraCostosEnvios {
   constructor() {
     const svTrans = new ServicioTransportes();
-
     let transportes;
+
+    const svUbi = new ServicioUbicaciones();
+    let ubicaciones;
 
     this.formCalc = document.getElementById("formCalc");
     this.datosFormCalc = null;
@@ -25,19 +28,17 @@ export default class CalculadoraCostosEnvios {
     const recipienteDistancia = document.getElementById("distancia-recorrida");
     const recipienteTiempoEstimado = document.getElementById("tiempo-estimado");
 
-    // Agregar cada ubicación de la clase Ubicacion como options a cada select
-    Object.values(Ubicacion.ubicaciones).forEach((ubicacion) => {
-      // Convertir la primera letra de cada nombre en mayúsculas para mejor presentación
-      const nombreEnMayuscula = Utilidades.primeraLetraMayuscula(
-        ubicacion.nombre
-      );
-      selectOrigen.appendChild(new Option(nombreEnMayuscula, ubicacion.nombre));
-      selectDestino.appendChild(
-        new Option(nombreEnMayuscula, ubicacion.nombre)
-      );
+    // hacer peticion a la api, cuando se reciban los datos,
+    // llena los selects de ubicaciones
+    svUbi.obtUbicaciones().then((res) => {
+      ubicaciones = res;
+      Object.values(res).forEach((ubicacion) => {
+        selectOrigen.appendChild(new Option(ubicacion.nombre, ubicacion.id));
+        selectDestino.appendChild(new Option(ubicacion.nombre, ubicacion.id));
+      });
     });
 
-    // hacer peticion a la api, cuando se reciban los datos, llena el select
+    // hacer peticion a la api, cuando se reciban los datos, llena el select de transportes
     svTrans.obtTransportes().then((res) => {
       transportes = res;
       Object.values(res).forEach((transporte) => {
@@ -64,18 +65,26 @@ export default class CalculadoraCostosEnvios {
       // Crear un paquete
       const paquete = new Paquete(this.datosFormCalc["peso"], dimensiones);
 
-      let transporteSeleccionado;
-      transportes.forEach((transporte) => {
-        if (transporte.id === selectTransporte.value) {
-          transporteSeleccionado = transporte;
-        }
-      });
+      const transporteSeleccionado = Utilidades.buscarObjEnArray(
+        selectTransporte.value,
+        transportes
+      );
+
+      const origenSeleccionado = Utilidades.buscarObjEnArray(
+        selectOrigen.value,
+        ubicaciones
+      );
+
+      const destinoSeleccionado = Utilidades.buscarObjEnArray(
+        selectDestino.value,
+        ubicaciones
+      );
 
       // Crear un objeto envio con los valores del form
       const envio = new Envio(
         paquete,
-        Ubicacion.ubicaciones[this.datosFormCalc["origen"]],
-        Ubicacion.ubicaciones[this.datosFormCalc["destino"]],
+        origenSeleccionado,
+        destinoSeleccionado,
         transporteSeleccionado
       );
 

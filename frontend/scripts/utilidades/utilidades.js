@@ -8,4 +8,13 @@ export default class Utilidades {
       elemento.removeChild(elemento.firstChild);
     }
   }
+
+  static buscarObjEnArray(id, objArray) {
+    for (let i = 0; i < objArray.length; i++) {
+      const obj = objArray[i];
+      if (obj.id === id) {
+        return obj;
+      }
+    }
+  }
 }
