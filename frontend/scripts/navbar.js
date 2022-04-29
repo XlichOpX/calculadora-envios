@@ -16,5 +16,10 @@ export default class Navbar {
       ".navbar-nav a[href='/logout']"
     ).parentElement;
     logoutNav.className = "oculto";
+
+    const enviosNav = document.querySelector(
+      ".navbar-nav a[href='/envios']"
+    ).parentElement;
+    enviosNav.className = "oculto";
   }
 }

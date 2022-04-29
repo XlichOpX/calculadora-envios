@@ -30,3 +30,7 @@ body {
   color: var(--bg-dark);
   padding-bottom: 1rem;
 }
+
+thead td {
+  text-align: center;
+}

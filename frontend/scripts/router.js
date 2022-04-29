@@ -5,6 +5,7 @@ import Autenticacion from "./api/autenticacion.js";
 import Logout from "/views/logout/logout.js";
 import Navbar from "./navbar.js";
 import RecuperarClave from "/views/recuperar-clave/recuperar-clave.js";
+import Envios from "/views/envios/envios.js";
 
 // agg listeners a los links de la nav
 document.querySelectorAll(".navbar-nav a").forEach((enlace) => {
@@ -37,6 +38,12 @@ const rutas = {
     path: "/views/calculadora/calculadora.html",
     nombre: "Calculadora",
     disparador: Calculadora,
+    bloqueada: true,
+  },
+  "/envios": {
+    path: "/views/envios/envios.html",
+    nombre: "Envios",
+    disparador: Envios,
     bloqueada: true,
   },
   "/login": {
