@@ -54,3 +54,10 @@ function validarJWT($jwt, $clave_secreta)
         return true;
     }
 }
+
+function obtDataJWT($jwt)
+{
+    $payload = explode(".", $jwt)[1];
+    $data = base64_decode($payload);
+    return json_decode($data, true);
+}

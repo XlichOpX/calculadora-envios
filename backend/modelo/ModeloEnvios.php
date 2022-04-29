@@ -1,6 +1,6 @@
 <?php
 
-require_once "./modelo/conexion.php";
+require_once "./modelo/Conexion.php";
 
 class ModeloEnvios extends Conexion
 {
@@ -155,5 +155,36 @@ class ModeloEnvios extends Conexion
 
         // si no, devuelve false
         return false;
+    }
+
+    public function obtEnvios($usuario)
+    {
+        $query = <<<SQL
+            select
+                envios.id as num_tracking,
+                estatus.estatus,
+                ubi1.nombre as origen,
+                ubi2.nombre as destino
+            from
+                envios,
+                estatus,
+                ubicaciones as ubi1,
+                ubicaciones as ubi2
+            where
+                envios.id_origen = ubi1.id
+                && envios.id_destino = ubi2.id
+                && estatus.id = envios.id_estatus
+                && envios.id_usuario = :usuario
+            order by
+                envios.fecha_creacion desc
+        SQL;
+        $resultado = $this->query($query, [
+            [
+                "nombre" => "usuario",
+                "valor" => $usuario,
+                "tipo" => PDO::PARAM_INT,
+            ],
+        ]);
+        return $resultado;
     }
 }
