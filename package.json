@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "prettier": "prettier --write .",
-    "lint": "eslint ."
+    "prettier": "prettier --write . --ignore-path ./.gitignore",
+    "lint": "eslint --fix . --ignore-path ./.gitignore"
   },
   "devDependencies": {
     "@prettier/plugin-php": "0.18.4",
@@ -11,5 +11,20 @@
   },
   "prettier": {
     "phpVersion": "8.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "rules": {}
   }
 }
